@@ -3,7 +3,7 @@
 export const Header = () => {
   return (
     <div>
-      Header component
+      {/* Header component */}
     </div>
   )
 }
