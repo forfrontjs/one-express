@@ -41,14 +41,10 @@
   align-items: center;
 }
 
-.formLabelPasword::after {
-  content: url("./IconViewDisabled.png");
-  width: 24px;
-  height: 24px;
-  color: #282b26;
-  position: absolute;
-  top: 24px;
-  right: 29px;
+.showPassword {
+  position: relative;
+  top: 2px;
+  right: -9px;
   cursor: pointer;
 }
 
@@ -114,4 +110,55 @@ p {
   font-weight: 500;
   line-height: 29.96px;
   color: #282b26;
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .container {
+    max-width: 335px;
+  }
+  .loginTitle {
+    font-size: 26px;
+  }
+  .formAuthorization {
+    width: 100%;
+    height: 239px;
+    margin: 50px 0 50px;
+  }
+  .formInput {
+    font-size: 16px;
+  }
+  .formLabel {
+    width: 100%;
+    height: 54px;
+  }
+  .formLabel {
+    width: 100%;
+    height: 54px;
+  }
+  .formLabelPasword {
+    width: 100%;
+    height: 54px;
+  }
+  .showPassword {
+    right: 4px;
+    content: url("./images/Icon\ view\ disabled\ \(1\).png");
+  }
+  .formForgotPassword {
+    font-size: 16px;
+  }
+  .loginButton {
+    width: 100%;
+    height: 54px;
+    font-size: 18px;
+  }
+  .registrationText {
+    display: block;
+    text-align: center;
+  }
+  p {
+    font-size: 16px;
+  }
+  .registrationLink {
+    font-size: 16px;
+  }
 }
