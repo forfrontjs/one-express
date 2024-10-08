@@ -1,0 +1,302 @@
+.wrapper {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.searchSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 600;
+  font-size: 44px;
+  margin-left: 16px;
+  color: #282b26;
+}
+
+.line {
+  width: 520px;
+  height: 1px;
+  background-color: #ececec;
+  margin-left: 20px;
+}
+
+.lineTitle {
+  width: 120px;
+  stroke-width: 1px;
+  border: solid 1px rgb(212, 210, 210);
+  rotate: 90deg;
+  margin-left: 125px;
+  margin-top: 100px;
+}
+
+.trackingInfo {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  margin-left: 20px;
+  position: relative;
+}
+
+.searchInp {
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  width: 480px;
+  height: 80px;
+  padding: 10px 15px;
+  font-size: 18px;
+  border: 1px solid #686a67;
+  border-radius: 4px;
+}
+
+.searchButton {
+  width: 184px;
+  height: 80px;
+  background-color: #686a67;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+}
+
+.searchButton:hover {
+  background-color: #090909;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.history {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 540px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  /* Увеличь z-index */
+}
+
+
+.history ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 10px 15px;
+  margin: 5px 0;
+  border: 1px solid #e0e0e0;
+  font-family: 'Noto Sans', sans-serif;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.historyItem:hover {
+  background-color: #f0f0f0;
+}
+
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  color: #ff5252;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.deleteButton:hover {
+  color: #ff0000;
+}
+
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.result {
+  margin-top: 60px;
+}
+
+.result .info_title {
+  font-size: 28px;
+  margin-left: 16px;
+  color: #282b26;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  margin-bottom: 20px;
+}
+
+.trackingTable {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dotsContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 21px;
+  /* ширина контейнера для 3 точек */
+  height: 145px;
+  /* высота контейнера */
+  margin: 0 auto;
+  flex-direction: column;
+  z-index: -11;
+}
+
+.dot {
+  width: 21px;
+  height: 21px;
+  background-color: #F5D100;
+  /* цвет круга */
+  border-radius: 50%;
+  /* делаем круг */
+
+}
+
+.trackingRow {
+  display: table-row;
+}
+
+.trackingCell,
+.trackingCellHeader {
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 20px;
+  text-align: left;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 10px;
+}
+
+.trackingCellHeader {
+  font-weight: bold;
+}
+
+.trackingCellDate {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.statusWithDot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  // padding-left: -30px;
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
+.statusWithDot::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #F5D100;
+  border-radius: 50%;
+  position: absolute;
+  margin-left: -50px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.trackingCell,
+.trackingCellHeader {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 20px;
+  text-align: left;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 10px;
+}
+
+.trackingCellHeader {
+  font-weight: bold;
+}
+
+.trackingCellDate {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.statusWithDot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .container {
+      padding: 10px;
+  }
+
+  .title {
+      font-size: 32px;
+  }
+
+  .searchButton {
+      background-image: url(../../../../assets/Images/лупа.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 30px 30px;
+      color: transparent;
+      width: 60px;
+      height: 60px;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+
+  .searchButton:hover {
+      background-color: #090909;
+  }
+
+  .searchInp {
+      max-width: 400px;
+      height: 60px;
+      font-size: 16px;
+  }
+
+  .history {
+      max-width: 400px;
+  }
+
+  .trackingCell,
+  .trackingCellHeader {
+      padding: 10px;
+      font-size: 14px;
+  }
+}
