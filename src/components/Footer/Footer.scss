@@ -1,0 +1,52 @@
+.footer {
+    width: 1440px;
+    height: 139px;
+    background: #282b26;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .inner {
+    width: 1284px;
+    height: 85px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .social {
+    width: 110px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .contacts {
+    width: 534px;
+    height: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .firstlogo {
+    width: 85px;
+    height: 85px;
+  }
+  
+  .sociallogos {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .links {
+    font-family: "Noto Sans";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21.79px;
+    color: #ececec;
+    text-decoration: none;
+    
+  }
+  
