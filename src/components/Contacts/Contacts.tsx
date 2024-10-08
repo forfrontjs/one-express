@@ -5,7 +5,7 @@ import logo2 from "./Phone number 2.png"
 import logo3 from "./Phone number 3.png"
 
 
-export const contacts = () => {
+export const Contacts = () => {
     return (
         
         <div className="contact">
