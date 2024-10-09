@@ -43,6 +43,8 @@
 
 .showPassword {
   position: relative;
+  width: 25px;
+  height: 25px;
   top: 2px;
   right: -9px;
   cursor: pointer;
@@ -103,6 +105,14 @@ p {
   line-height: 29.96px;
   color: #282b26;
 }
+.message {
+  font-family: Noto Sans;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 29.96px;
+  color: red;
+  text-align: center;
+}
 
 .registrationLink {
   font-family: Noto Sans;
@@ -141,7 +151,7 @@ p {
   }
   .showPassword {
     right: 4px;
-    content: url("./images/Icon\ view\ disabled\ \(1\).png");
+    // content: url("./images/Icon\ view\ disabled\ \(1\).png");
   }
   .formForgotPassword {
     font-size: 16px;
