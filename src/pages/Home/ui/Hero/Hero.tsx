@@ -18,10 +18,11 @@ export const Hero = () => {
     { imgSrc: title4 },
   ];
 
-  // Используйте useRef для кнопок навигации
+  
   const swiperRef = useRef<SwiperCore | null>(null);
 
   return (
+
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.title}>
@@ -32,7 +33,7 @@ export const Hero = () => {
 
         <div className={styles.wrapper}>
           <Swiper
-            onSwiper={(swiperInstance) => (swiperRef.current = swiperInstance)} // Получаем экземпляр Swiper через onSwiper
+            onSwiper={(swiperInstance) => (swiperRef.current = swiperInstance)} 
             modules={[Navigation]}
             spaceBetween={20}
             slidesPerView={4}
@@ -61,7 +62,7 @@ export const Hero = () => {
             ))}
           </Swiper>
 
-          {/* Навигационные стрелки */}
+         
           <div className={styles.arrows}>
             <svg
               onClick={() => swiperRef.current?.slidePrev()}
