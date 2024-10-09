@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
-import headerLink from "../../assets/image/LogoHeader.png";
-import telegram from '../../assets/image/tegramlogo.svg';
-import instagram from '../../assets/image/instalogo.svg';
+import headerLink from "../../assets/images/LogoHeader.png";
+import telegram from '../../assets/images/tegramlogo.svg';
+import instagram from '../../assets/images/instalogo.svg';
 
 interface HeaderProps {}
 
