@@ -3,11 +3,12 @@ import "./Contacts.scss"
 import logo1 from "./Phone number 1.png"
 import logo2 from "./Phone number 2.png"
 import logo3 from "./Phone number 3.png"
+import  "../../assets/styles/_global.scss"
 
 
 export const Contacts = () => {
     return (
-        
+        <div className="container">
         <div className="contact">
             <div className="conta">
                 <p>Контакты</p>
@@ -50,6 +51,7 @@ export const Contacts = () => {
             </div>
             
             <div className="navi"></div>
+        </div>
         </div>
         
       )
