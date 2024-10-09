@@ -1,13 +1,14 @@
-import { useRef } from 'react'; // Import useRef
+import { useRef } from 'react';
 import styles from './Hero.module.scss';
 import { SwiperSlide, Swiper } from 'swiper/react';
-import { Navigation } from 'swiper/modules'; 
+import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import title1 from '../../../../assets/image/titleImage1.png';
 import title2 from '../../../../assets/image/titleImage2.png';
 import title3 from '../../../../assets/image/titleImage3.png';
 import title4 from '../../../../assets/image/titleImage2.png';
+import { Swiper as SwiperCore } from 'swiper';
 
 export const Hero = () => {
   const sliderData = [
@@ -17,8 +18,8 @@ export const Hero = () => {
     { imgSrc: title4 },
   ];
 
-  // Create a ref for the swiper with the appropriate type
-  const swiperRef = useRef<SwiperType | null>(null);
+  // Используйте useRef для кнопок навигации
+  const swiperRef = useRef<SwiperCore | null>(null);
 
   return (
     <section className={styles.section}>
@@ -28,29 +29,26 @@ export const Hero = () => {
           <div className={styles.line}></div>
           <p className={styles.textSecond}>Быстрая и надежная доставка товаров с Китая</p>
         </div>
-        
+
         <div className={styles.wrapper}>
           <Swiper
-            ref={swiperRef} 
-            modules={[Navigation]} 
+            onSwiper={(swiperInstance) => (swiperRef.current = swiperInstance)} // Получаем экземпляр Swiper через onSwiper
+            modules={[Navigation]}
             spaceBetween={20}
-            slidesPerView={3}
+            slidesPerView={4}
             slidesPerGroup={1}
             loop={true}
-            navigation={false} // Disable default navigation
+            navigation={false}
             className={styles.swiper}
             breakpoints={{
-              // Mobile devices - 3 slides
               368: {
-                slidesPerView: 3, // Show 3 slides on mobile
+                slidesPerView: 3,
               },
-              // Tablet devices - 2 slides
               768: {
-                slidesPerView: 2, // Show 2 slides on tablets
+                slidesPerView: 2,
               },
-              // Desktop devices - 1 slide
               1024: {
-                slidesPerView: 3, // Show 1 slide on larger screens
+                slidesPerView: 3,
               },
             }}
           >
@@ -63,22 +61,26 @@ export const Hero = () => {
             ))}
           </Swiper>
 
-          {/* Navigation arrows */}
+          {/* Навигационные стрелки */}
           <div className={styles.arrows}>
-            <svg 
-              onClick={() => swiperRef.current?.slidePrev()} // Use optional chaining
-              width="30" height="30" 
-              viewBox="0 0 30 30" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg">
+            <svg
+              onClick={() => swiperRef.current?.slidePrev()}
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path d="M20 15H5M5 15L15 25M5 15L15 5" stroke="#686A67" strokeWidth="2" />
             </svg>
-            <svg 
-              onClick={() => swiperRef.current?.slideNext()} // Use optional chaining
-              width="30" height="30" 
-              viewBox="0 0 30 30" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg">
+            <svg
+              onClick={() => swiperRef.current?.slideNext()}
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path d="M10 15H25M25 15L15 5M25 15L15 25" stroke="#686A67" strokeWidth="2" />
             </svg>
           </div>

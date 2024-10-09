@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import headerLink from "../../assets/image/LogoHeader.png";
@@ -18,7 +18,17 @@ export const Header: FC<HeaderProps> = () => {
   const handleLogin = () => {
     setIsLoggedIn(true); 
   };
-
+  useEffect(() => {
+    if(menuOpen){
+      document.body.style.overflow = 'hidden'
+    }else{
+      document.body.style.overflow = 'auto'
+    }
+    return () => {
+      document.body.style.overflow = 'auto'
+    };
+  },[menuOpen]);
+  
   return (
     <header className={styles.header}>
       <div className={styles.container}>
