@@ -5,7 +5,7 @@ import headerLink from "../../assets/images/LogoHeader.png";
 import telegram from '../../assets/images/tegramlogo.svg';
 import instagram from '../../assets/images/instalogo.svg';
 
-interface HeaderProps {}
+type HeaderProps = object
 
 export const Header: FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,7 +30,6 @@ export const Header: FC<HeaderProps> = () => {
   },[menuOpen]);
   
   return (
- Header
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.logo}>
