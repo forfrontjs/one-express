@@ -1,0 +1,164 @@
+.authorization {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loginTitle {
+  font-family: Noto Sans;
+  font-size: 46px;
+  font-weight: 600;
+  line-height: 62.65px;
+  color: #282b26;
+  text-align: center;
+}
+
+.formAuthorization {
+  width: 630px;
+  height: 304px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 100px 0 100px;
+}
+
+.formLabel {
+  width: 100%;
+  border: 1px solid #686a67;
+  height: 73px;
+  display: flex;
+  align-items: center;
+}
+
+.formLabelPasword {
+  width: 100%;
+  position: relative;
+  border: 1px solid #686a67;
+  height: 73px;
+  display: flex;
+  align-items: center;
+}
+
+.showPassword {
+  position: relative;
+  top: 2px;
+  right: -9px;
+  cursor: pointer;
+}
+
+.formInput {
+  width: 90%;
+  height: 40px;
+  padding: 23px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 27.24px;
+  text-align: left;
+  color: #a1a1a1;
+  border: none;
+}
+
+.formInput:focus {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.formForgotPassword {
+  text-align: end;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 27.24px;
+  color: #686a67;
+}
+
+.loginButton {
+  width: 100%;
+  height: 74px;
+  background-color: #f5d100;
+  border: none;
+  font-family: Noto Sans;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 29.96px;
+  color: #282b26;
+  cursor: pointer;
+}
+
+.registrationText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  width: 100%;
+}
+
+p {
+  font-family: Noto Sans;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 29.96px;
+  color: #282b26;
+}
+
+.registrationLink {
+  font-family: Noto Sans;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 29.96px;
+  color: #282b26;
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .container {
+    max-width: 335px;
+  }
+  .loginTitle {
+    font-size: 26px;
+  }
+  .formAuthorization {
+    width: 100%;
+    height: 239px;
+    margin: 50px 0 50px;
+  }
+  .formInput {
+    font-size: 16px;
+  }
+  .formLabel {
+    width: 100%;
+    height: 54px;
+  }
+  .formLabel {
+    width: 100%;
+    height: 54px;
+  }
+  .formLabelPasword {
+    width: 100%;
+    height: 54px;
+  }
+  .showPassword {
+    right: 4px;
+    content: url("./images/Icon\ view\ disabled\ \(1\).png");
+  }
+  .formForgotPassword {
+    font-size: 16px;
+  }
+  .loginButton {
+    width: 100%;
+    height: 54px;
+    font-size: 18px;
+  }
+  .registrationText {
+    display: block;
+    text-align: center;
+  }
+  p {
+    font-size: 16px;
+  }
+  .registrationLink {
+    font-size: 16px;
+  }
+}

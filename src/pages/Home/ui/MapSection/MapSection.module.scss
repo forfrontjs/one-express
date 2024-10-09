@@ -1,0 +1,44 @@
+.mapContainer {
+  width: 1284px;
+  height: 334px;
+  max-width: 66.88%;
+  max-height: 30.93%;
+  margin: 0 auto;
+}
+
+.leaflet-popup {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+}
+
+.leaflet-marker-icon {
+  filter: invert(1);
+}
+
+.leaflet-control-attribution {
+  display: none !important; /* Скрыть атрибуцию */
+}
+
+.leaflet-control-container .leaflet-control-zoom {
+  display: flex;
+  flex-direction: row; /* Горизонтальное расположение */
+  position: relative; /* Убедитесь, что это у вас есть */
+  margin: 10px 0; /* Чтобы добавить немного отступа */
+}
+
+.leaflet-control-zoom a {
+  margin: 0 5px; /* Отступ между кнопками */
+}
+
+.customZoomControl {
+  display: flex; /* Изменяем на flex для горизонтального расположения */
+  flex-direction: row; /* Горизонтальное расположение */
+  justify-content: center; /* Центрируем по горизонтали */
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.customZoomControl .leaflet-control-zoom {
+  margin: 0 5px; /* Добавляем отступ между кнопками */
+}
