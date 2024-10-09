@@ -1,0 +1,133 @@
+.container{
+    .admin__box{
+        display: flex;
+        flex-direction: column;
+        row-gap: 60px;
+    h1{
+        font-family: "Noto Sans", sans-serif;
+        font-weight: 600;
+        font-size: 46px;
+    }    
+
+    &__carousel{
+        display: flex;
+        flex-direction: column;
+        row-gap: 110px;
+        &__photos{
+            display: flex;
+            justify-content: space-between;
+            &__photo{
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                img{
+                display: block;
+                    margin-bottom: 15px;
+
+                }
+                button{
+                    border: none;
+                    background: none;
+                }
+            }
+        }
+    }
+
+    &__upload{
+        display: flex;
+        justify-content: space-between;
+
+        p{
+            font-family: "Noto Sans", sans-serif;
+            font-weight: 500;
+            font-size: 34px;
+            text-transform: lowercase;
+            color: #686A67;
+        }
+
+        &__btn{
+            font-family: "Noto Sans", sans-serif;
+            border: 1px solid #282B26;
+            padding: 22px 100px;
+            width: 375px;
+            height: 66px;
+            font-weight: 500;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: #282B26;
+            background-color: white;
+
+        }
+        &__photo{
+            display: none;
+        }
+    }
+    .cards{
+        display: flex;
+        justify-content: space-between;
+        &__card{
+            border: 1px solid #ECECEC;
+            padding: 25px 37px 25px 15px;
+            width: 418px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 470px;
+            
+            h2{
+                font-family:  "Noto Sans", sans-serif;
+                font-weight: 500;
+                font-size: 28px;
+                line-height: 120%;
+            }
+            input{
+               display: none;
+            }
+            &__label{
+                font-family: "Rokkitt", sans-serif;
+                display: inline-block;
+                padding: 20px;
+                border: 1px solid #686a67;
+                width: 388px;
+                height: 65px;
+                justify-content: start;
+                font-weight: 400;
+                font-size: 20px;
+                color: #686A67;
+                cursor: pointer;
+            }
+            button{
+                font-family: "Rokkitt", sans-serif;
+                padding: 23px 134px;
+                width: 388px;
+                height: 70px;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 120%;
+                text-transform: uppercase;
+                
+                border: none;
+            }
+            
+        }
+
+        &__card:nth-child(3){
+            button{
+                background: yellow;
+                color: black;
+            }
+        }
+        &__card:nth-child(1),:nth-child(2){
+            button:hover{
+                background: #282B26;
+                color: #ECECEC;            }
+        }
+    }
+}
+}
+
+@media(max-width: 1283px){
+    .container{
+width: 1084px;
+    }
+}

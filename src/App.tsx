@@ -1,19 +1,18 @@
-import { Footer } from "./components/Footer/Footer"
-import { Header } from "./components/Header"
+import "./assets/styles/index.scss"
 import { Home } from "./pages/Home/Home"
-import { Contacts } from "./components/Contacts/Contacts"
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout/Layout";
+import { Admin } from "./pages/Admin/Admin";
+import Login from "./pages/Login/Login";
 
-import './assets/styles/index.scss'
-
-export const App =  () => {
-
+export const App = () => {
   return (
-    <>
-      <Header />
-      <Home />
-      <Contacts/>
-      <Footer/>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login/>}/>
+        </Route>
+      </Routes>
+  );}
 
-    </>
-  )
-}
