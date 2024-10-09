@@ -2,9 +2,9 @@
 import { Link } from "react-router-dom";
 import "./Footer.scss"
 
-import logo from "./Logotype.png"
-import tele from "./Telegram.png"
-import inst from "./Instagram (1).png"
+import logo from "../../assets/images/footer/Logotype.png"
+import tele from "../../assets/images/footer/Telegram.png"
+import inst from "../../assets/images/footer/Instagram (1).png"
 
 import "../../assets/styles/_global.scss"
 
@@ -16,14 +16,14 @@ export const Footer = () => {
         <div className="inner">
             <img className="firstlogo" src={logo} alt="" />
             <nav className="contacts">
-                <Link to="#" className="links">Главная</Link>
-                <Link to="#" className="links">Калькулятор</Link>
-                <Link to="#" className="links">Отслеживание</Link>
-                <Link to="#" className="links">Контакты</Link>
+                <Link to="/home" className="links">Главная</Link>
+                <Link to="/calc" className="links">Калькулятор</Link>
+                <Link to="/navigate" className="links">Отслеживание</Link>
+                <Link to="/contacts" className="links">Контакты</Link>
                 </nav>
             <div className="social">
-                <a href="#"><img className="sociallogos" src={tele} alt="" /></a>
-                <a href="#"><img className="sociallogos" src={inst} alt="" /></a>
+                <a href="https://telegram.org"><img className="sociallogos" src={tele} alt="" /></a>
+                <a href="https://instagram.com"><img className="sociallogos" src={inst} alt="" /></a>
                 </div>
         </div>
             

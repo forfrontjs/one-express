@@ -1,7 +1,7 @@
 import "./Contacts.scss"
-import logo1 from "./Phone number 1.png"
-import logo2 from "./Phone number 2.png"
-import logo3 from "./Phone number 3.png"
+import logo1 from "../../../../assets/images/contacts/Phone number 1.png"
+import logo2 from "../../../../assets/images/contacts/Phone number 2.png"
+import logo3 from "../../../../assets/images/contacts/Phone number 3.png"
 import  "../../../../assets/styles/_global.scss"
 
 
