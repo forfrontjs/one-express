@@ -5,6 +5,7 @@ import { Layout } from "./components/Layout/Layout";
 import { Admin } from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
 import ProfileProgressBar from "./pages/Profile/ProfileProgressBar";
+import NotFound from "./pages/NotFound/NotFound";
 
 export const App = () => {
   return (
@@ -15,6 +16,7 @@ export const App = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<ProfileProgressBar />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>
