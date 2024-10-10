@@ -15,7 +15,7 @@
 }
 
 .title {
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
   font-weight: 600;
   font-size: 44px;
   margin-left: 16px;
@@ -27,15 +27,6 @@
   height: 1px;
   background-color: #ececec;
   margin-left: 20px;
-}
-
-.lineTitle {
-  width: 120px;
-  stroke-width: 1px;
-  border: solid 1px rgb(212, 210, 210);
-  rotate: 90deg;
-  margin-left: 125px;
-  margin-top: 100px;
 }
 
 .trackingInfo {
@@ -54,6 +45,17 @@
   font-size: 18px;
   border: 1px solid #686a67;
   border-radius: 4px;
+  color: #333;
+  transition: border-color 0.3s;
+
+  &::placeholder {
+    color: gray; // Стили для текста ошибки в инпуте
+  }
+
+  &:focus {
+    border-color: #090909;
+    outline: none;
+  }
 }
 
 .searchButton {
@@ -73,17 +75,11 @@
   background-color: #090909;
 }
 
-.error {
-  color: red;
-  margin-top: 10px;
-  font-family: 'Noto Sans', sans-serif;
-}
-
 .history {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 540px;
+  width: 240px;
   max-height: 200px;
   overflow-y: auto;
   background-color: #fff;
@@ -91,9 +87,7 @@
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  /* Увеличь z-index */
 }
-
 
 .history ul {
   padding: 0;
@@ -109,7 +103,7 @@
   padding: 10px 15px;
   margin: 5px 0;
   border: 1px solid #e0e0e0;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
@@ -131,172 +125,161 @@
   color: #ff0000;
 }
 
-
-.deleteButton {
-  background: none;
-  border: none;
-  color: red;
-  cursor: pointer;
-  font-size: 16px;
-}
-
 .result {
-  margin-top: 60px;
-}
-
-.result .info_title {
-  font-size: 28px;
-  margin-left: 16px;
-  color: #282b26;
-  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
-  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 40px;
 }
 
 .trackingTable {
-  display: table;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.dotsContainer {
   display: flex;
+  justify-content: center;
   justify-content: space-between;
-  width: 21px;
-  /* ширина контейнера для 3 точек */
-  height: 145px;
-  /* высота контейнера */
-  margin: 0 auto;
-  flex-direction: column;
-  z-index: -11;
-}
-
-.dot {
-  width: 21px;
-  height: 21px;
-  background-color: #F5D100;
-  /* цвет круга */
-  border-radius: 50%;
-  /* делаем круг */
-
 }
 
 .trackingRow {
-  display: table-row;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  flex-direction: column;
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
-.trackingCell,
 .trackingCellHeader {
   font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
-  display: table-cell;
-  vertical-align: middle;
-  padding: 20px;
-  text-align: left;
-  border-radius: 8px;
-  background-color: #fff;
-  margin: 10px;
-}
-
-.trackingCellHeader {
   font-weight: bold;
+  color: #666;
+  width: 170px;
+  text-align: left;
+  font-size:12px;
 }
 
-.trackingCellDate {
+.trackingCell {
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.statusWithDot {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  // padding-left: -30px;
-  max-width: 300px;
-  word-wrap: break-word;
-}
-
-.statusWithDot::before {
-  content: '';
-  width: 12px;
-  height: 12px;
-  background-color: #F5D100;
-  border-radius: 50%;
-  position: absolute;
-  margin-left: -50px;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-.trackingCell,
-.trackingCellHeader {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 20px;
+  row-gap: 30px;
+  flex: 1;
+  padding-top: 30px;
   text-align: left;
-  border-radius: 8px;
-  background-color: #fff;
-  margin: 10px;
+  color: #333;
+  font-size: 11px;
+
+  div {
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
-.trackingCellHeader {
-  font-weight: bold;
-}
-
-.trackingCellDate {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.statusWithDot {
+.trackingStatusIndicator {
   display: flex;
   align-items: center;
-  gap: 8px;
+
+  .statusDot {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    background-color: #f0c300;
+    border-radius: 50%;
+    margin-left: -40px;
+    margin-top: 10px;
+  }
+
+  .statusDescription {
+    color: #333;
+    font-size: 11px;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 780px) {
   .container {
-      padding: 10px;
+    padding: 10px;
   }
 
   .title {
-      font-size: 32px;
+    font-size: 32px;
   }
 
   .searchButton {
-      background-image: url(../../../../assets/Images/лупа.png);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 30px 30px;
-      color: transparent;
-      width: 60px;
-      height: 60px;
-      padding: 0;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-  }
-
-  .searchButton:hover {
-      background-color: #090909;
+    background-image: url(../../../../assets/images/лупа.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px 30px;
+    color: transparent;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
   }
 
   .searchInp {
-      max-width: 400px;
-      height: 60px;
-      font-size: 16px;
+    max-width: 400px;
+    height: 60px;
+    font-size: 16px;
   }
 
   .history {
-      max-width: 400px;
+    max-width: 400px;
   }
 
-  .trackingCell,
-  .trackingCellHeader {
-      padding: 10px;
-      font-size: 14px;
+  .trackingTable {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 50px;
   }
+
+  .trackingRow {
+    display: flex;
+    flex-direction: column;
+    max-width: 180px;
+    padding: 10px;
+  }
+
+  .trackingRow:nth-child(3) {
+    order: 1;
+  }
+
+  .trackingRow:nth-child(4) {
+    order: 2;
+  }
+
+  .trackingRow:nth-child(2) {
+    order: 4;
+  }
+
+  .trackingRow:nth-child(1) {
+    order: 3;
+  }
+
+  .trackingRow:nth-child(1),
+  .trackingRow:nth-child(2) {
+    width: 48%;
+  }
+
+  .trackingRow:nth-child(3),
+  .trackingRow:nth-child(4) {
+    width: 48%;
+  }
+
+  .trackingRow::before {
+    display: none;
+  }
+}
+
+@media(max-width: 380px) {
+    // .searchInp{
+
+    // }
+    .title {
+      font-size: 2;
+    }
 }
