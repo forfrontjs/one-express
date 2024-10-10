@@ -2,10 +2,10 @@ import { FC, useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import headerLink from "../../assets/image/LogoHeader.png";
-import telegram from '../../assets/image/tegramlogo.svg';
-import instagram from '../../assets/image/instalogo.svg';
+import telegram from "../../assets/image/tegramlogo.svg";
+import instagram from "../../assets/image/instalogo.svg";
 
-interface HeaderProps {}
+type HeaderProps = object;
 
 export const Header: FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,21 +16,20 @@ export const Header: FC<HeaderProps> = () => {
   };
 
   const handleLogin = () => {
-    setIsLoggedIn(true); 
+    setIsLoggedIn(true);
   };
   useEffect(() => {
-    if(menuOpen){
-      document.body.style.overflow = 'hidden'
-    }else{
-      document.body.style.overflow = 'auto'
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = 'auto'
+      document.body.style.overflow = "auto";
     };
-  },[menuOpen]);
-  
+  }, [menuOpen]);
+
   return (
- Header
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.logo}>
@@ -41,33 +40,65 @@ export const Header: FC<HeaderProps> = () => {
         <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <Link to="/login" className={styles.link} onClick={toggleMenu}>Вход</Link>
+              <Link to="/login" className={styles.link} onClick={toggleMenu}>
+                Вход
+              </Link>
             </li>
             <li className={styles.navItem}>
-              <a href="#" className={styles.link} onClick={toggleMenu}>Главная</a>
+              <a href="#" className={styles.link} onClick={toggleMenu}>
+                Главная
+              </a>
             </li>
             <li className={styles.navItem}>
-              <a href="#calculate" className={styles.link} onClick={toggleMenu}>Калькулятор</a>
+              <a href="#calculate" className={styles.link} onClick={toggleMenu}>
+                Калькулятор
+              </a>
             </li>
             <li className={styles.navItem}>
-              <a href="#tracking" className={styles.link} onClick={toggleMenu}>Отслеживание</a>
+              <a href="#tracking" className={styles.link} onClick={toggleMenu}>
+                Отслеживание
+              </a>
             </li>
             <li className={styles.navItem}>
-              <a href="#contacts" className={styles.link} onClick={toggleMenu}>Контакты</a>
+              <a href="#contacts" className={styles.link} onClick={toggleMenu}>
+                Контакты
+              </a>
             </li>
             {menuOpen && (
               <li className={styles.navItem}>
-                <Link to="/profile" className={styles.link} onClick={toggleMenu}>Личный профиль</Link>
+                <Link
+                  to="/profile"
+                  className={styles.link}
+                  onClick={toggleMenu}
+                >
+                  Личный профиль
+                </Link>
               </li>
             )}
           </ul>
           {menuOpen && (
             <div className={styles.socialMediaIcons}>
-              <a href="https://telegram.org" target="_blank" rel="noopener noreferrer">
-                <img src={telegram} alt="Telegram" className={styles.socialIcon} />
+              <a
+                href="https://telegram.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={telegram}
+                  alt="Telegram"
+                  className={styles.socialIcon}
+                />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <img src={instagram} alt="Instagram" className={styles.socialIcon} />
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={instagram}
+                  alt="Instagram"
+                  className={styles.socialIcon}
+                />
               </a>
             </div>
           )}
@@ -89,9 +120,13 @@ export const Header: FC<HeaderProps> = () => {
             </>
           ) : (
             <>
-              <div className={`${styles.burgerIcon} ${styles.leftburger}`}></div>
+              <div
+                className={`${styles.burgerIcon} ${styles.leftburger}`}
+              ></div>
               <div className={styles.burgerIcon}></div>
-              <div className={`${styles.burgerIcon} ${styles.rightburger}`}></div>
+              <div
+                className={`${styles.burgerIcon} ${styles.rightburger}`}
+              ></div>
             </>
           )}
         </div>
@@ -99,4 +134,3 @@ export const Header: FC<HeaderProps> = () => {
     </header>
   );
 };
-
