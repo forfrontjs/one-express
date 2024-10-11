@@ -1,70 +1,62 @@
-// import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// interface LoginState {
-//   email: string;
-//   password: string;
-// }
+// Интерфейс для пользователя
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
-// const initialState: LoginState = {
-//   email: "",
-//   password: "",
-// };
+// Интерфейс для логина
+interface LoginPayload {
+  email: string;
+  password: string;
+}
 
-// const loginSlice = createSlice({
-//   name: "login",
-//   initialState,
-//   reducers: {
-//     setEmail(state, action: PayloadAction<string>) {
-//       state.email = action.payload;
-//     },
-//     setPassword(state, action: PayloadAction<string>) {
-//       state.password = action.payload;
-//     },
-//   },
-// });
+// Интерфейс для ответа на запрос логина
+interface LoginResponse {
+  user: User;
+}
 
-// export const { setEmail, setPassword } = loginSlice.actions;
-// export default loginSlice.reducer;
+// Интерфейс для изображений
+export interface Image {
+  id: number;
+  url: string;
+}
 
-// if (login === "123" && password === "123") {
-//   fullfilled;
-// }
-
-import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
-
-// Мокированные данные
-const mockUsers = [
-  { id: 1, name: "John Doe", email: "john@example.com", password: "123456" },
-  { id: 2, name: "Jane Doe", email: "jane@example.com", password: "password" },
-];
-
-// Создаем API-сервис с использованием моков
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fakeBaseQuery(), // Используем фейковый запрос
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_APP_API_URL, 
+    prepareHeaders: (headers) => {
+      headers.set('Content-Type', 'application/json');
+      return headers;
+    },
+    // Обработка ошибок
+    fetchFn: async (input, init) => {
+      const response = await fetch(input, init);
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`Ошибка: ${response.status} - ${error}`);
+      }
+      return response;
+    },
+  }),
   endpoints: (builder) => ({
-    // Пример запроса для получения списка пользователей
-    getUsers: builder.query({
-      queryFn: () => {
-        return { data: mockUsers };
-      },
+    getUsers: builder.query<User[], void>({
+      query: () => '/users',
     }),
-    // Эндпоинт для проверки логина пользователя
-    loginUser: builder.mutation({
-      queryFn: ({ email, password }) => {
-        const user = mockUsers.find(
-          (user) => user.email === email && user.password === password
-        );
-        if (user) {
-          return { data: user }; // Возвращаем найденного пользователя
-        }
-        return {
-          error: { status: 404, message: "Неправильный email или пароль!" },
-        }; // Ошибка, если пользователь не найден
-      },
+    loginUser: builder.mutation<LoginResponse, LoginPayload>({
+      query: ({ email, password }) => ({
+        url: '/auth/login',
+        method: 'POST',
+        body: { email, password },
+      }),
+    }),
+    getImages: builder.query<Image[], void>({
+      query: () => '/uploads',
     }),
   }),
 });
 
-// Экспортируем хук для использования в компонентах
-export const { useGetUsersQuery, useLoginUserMutation } = apiSlice;
+export const { useGetUsersQuery, useLoginUserMutation, useGetImagesQuery } = apiSlice;
