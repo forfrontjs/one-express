@@ -1,0 +1,75 @@
+.container {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  font-family: "Noto Sans", "Helvetica Neue";
+  width: 100%;
+  height: 662px;
+  margin: auto;
+  max-height: 61.15%;
+}
+
+.container2 {
+  width: 94%;
+  height: 100%;
+  max-width: 1284px;
+}
+
+.box {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+  font-family: "Noto Sans", "Helvetica Neue";
+  text-align: left;
+  margin-top: 5vh;
+}
+
+.h2 {
+  width: 418px;
+  font-family: "Noto Sans", "Helvetica Neue";
+  font-size: larger;
+}
+
+.levels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 7vh;
+}
+
+.level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.level img {
+  width: 100px;
+  height: 100px;
+}
+
+.progressBarContainer {
+  width: 83.8%;
+  margin: 0 auto;
+  position: relative;
+  margin-top: 20px;
+}
+
+.progressValue {
+  position: absolute;
+  left: 0;
+  top: -25px;
+  color: #ffcc00;
+}
+
+.resetNotice {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: #aaaaaa;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

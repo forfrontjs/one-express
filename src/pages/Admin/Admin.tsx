@@ -1,6 +1,6 @@
-import styles from './Admin.module.scss'
-import Photo from '../../assets/images/WhatsApp Image 2024-02-27 at 11.09 1.png'
-import Delete from '../../assets/images/DeleteLogo.png'
+import styles from "./Admin.module.scss";
+import Photo from "../../assets/images/WhatsApp Image 2024-02-27 at 11.09 1.png";
+import Delete from "../../assets/images/Delete.png";
 export const Admin = () => {
   return (
     <div className={`${styles.container} container`}>
@@ -14,7 +14,10 @@ export const Admin = () => {
               id="file-upload"
               className={styles.admin__box__upload__photo}
             />
-            <label htmlFor="file-upload" className={styles.admin__box__upload__btn}>
+            <label
+              htmlFor="file-upload"
+              className={styles.admin__box__upload__btn}
+            >
               Загрузить фото
             </label>
           </div>
@@ -82,6 +85,4 @@ export const Admin = () => {
       </div>
     </div>
   );
-}
-
-
+};
