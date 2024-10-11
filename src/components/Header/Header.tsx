@@ -26,6 +26,7 @@ export const Header: FC<HeaderProps> = () => {
   }, [menuOpen]);
 
   return (
+
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.logo}>
