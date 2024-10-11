@@ -20,6 +20,7 @@ export const App = () => {
           <Route path="/registration" element={<Registration/>}  />        
         </Route>
       </Routes>
+
     </>
-  );
+  )
 }
