@@ -7,10 +7,10 @@ import 'swiper/css/navigation';
 import { Swiper as SwiperCore } from 'swiper';
 import { useGetImagesQuery } from '../../../Login/store/loginSlice'; 
 
-import title1 from './../../../../assets/images/titleImage1.png'
-import title2 from './../../../../assets/images/titleImage2.png'
-import title3 from './../../../../assets/images/titleImage3.png'
-import title4 from './../../../../assets/images/titleImage2.png'
+import title1 from './../../../../assets/images/titleImage1.png';
+import title2 from './../../../../assets/images/titleImage2.png';
+import title3 from './../../../../assets/images/titleImage3.png';
+import title4 from './../../../../assets/images/titleImage2.png';
 
 interface Image {
   id: number; 
@@ -21,7 +21,7 @@ export const Hero = () => {
   const swiperRef = useRef<SwiperCore | null>(null);
   const { data: images = [],  isLoading } = useGetImagesQuery();
 
-  // Временные изображения
+  // Временные изображения на случай отсутствия данных
   const tempImages: Image[] = [
     { id: 1, url: title1 }, 
     { id: 2, url: title2 },
@@ -29,20 +29,13 @@ export const Hero = () => {
     { id: 4, url: title4 },
   ];
 
-  
   if (isLoading) {
     return <div>Loading...</div>; 
   }
 
-  
-  
-
-   
-
   console.log('Полученные изображения:', images); 
 
-
-  const Images = images.length > 0 ? images : tempImages;
+  const Images = images.length > 0 ? images : tempImages; // Используем полученные или временные изображения
 
   return (
     <section className={styles.section}>
@@ -121,4 +114,3 @@ export const Hero = () => {
     </section>
   );
 };
-
