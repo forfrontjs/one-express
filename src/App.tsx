@@ -12,9 +12,9 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login/>}/>
         </Route>
+          <Route path="/admin" element={<Admin />} />
       </Routes>
     </>
   );

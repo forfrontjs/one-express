@@ -14,7 +14,10 @@ export const Admin = () => {
               id="file-upload"
               className={styles.admin__box__upload__photo}
             />
-            <label htmlFor="file-upload" className={styles.admin__box__upload__btn}>
+            <label
+              htmlFor="file-upload"
+              className={styles.admin__box__upload__btn}
+            >
               Загрузить фото
             </label>
           </div>
@@ -56,7 +59,12 @@ export const Admin = () => {
               >
                 Выбрать файл
               </label>
-              <p>Какой-то файл много текста короче</p>
+              <input
+                type="date"
+                value="2024-10-10"
+                min="2024-10-10"
+                // max="2018-12-31"
+              />
             </div>
             <button>Отправить</button>
           </div>
@@ -70,7 +78,7 @@ export const Admin = () => {
               >
                 Выбрать файл
               </label>
-              <p>Какой-то файл много текста короче</p>
+              <input type="date" value="2024-06-01" />
             </div>
             <button>Отправить</button>
           </div>
