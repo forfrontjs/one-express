@@ -5,6 +5,7 @@
 
 .container {
   max-width: 1180px;
+  min-height: 70vh;
   margin: 0 auto;
 }
 
@@ -205,6 +206,9 @@
   .title {
     font-size: 32px;
   }
+  .statusDescription {
+    font-size: 11px;
+  }
 
   .searchButton {
     background-image: url(../../../../assets/images/лупа.png);
@@ -221,7 +225,7 @@
   }
 
   .searchInp {
-    max-width: 400px;
+    max-width: 300px;
     height: 60px;
     font-size: 16px;
   }
@@ -276,10 +280,11 @@
 }
 
 @media(max-width: 380px) {
-    // .searchInp{
-
-    // }
+    .searchInp{
+      margin-left: -21px;
+       max-width: 220px;
+    }
     .title {
-      font-size: 2;
+      margin-left: -1px;
     }
 }
