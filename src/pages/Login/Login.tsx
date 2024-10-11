@@ -35,7 +35,7 @@ const Login: FC = () => {
 
     // Отправляем данные для проверки
     try {
-      const result = await loginUser({
+      await loginUser({
         email: inputEmail,
         password: inputPassword,
       }).unwrap();
@@ -43,7 +43,11 @@ const Login: FC = () => {
       navigate("/");
     } catch (error) {
       // Если произошла ошибка
-      setMessage(error.message);
+      if (error instanceof Error) {
+        setMessage(error.message);
+      } else {
+        setMessage("An unknown error occurred.");
+      }
     }
 
     setInputEmail("");
