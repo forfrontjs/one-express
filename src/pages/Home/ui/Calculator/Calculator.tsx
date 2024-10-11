@@ -63,7 +63,7 @@ export const Calculator: React.FC = () => {
     <div id="Calculculator" className={styles.cargoCalculator}>
       <div className={styles.group_cc}>
         <h2 className={styles.title_calculator}>Калькулятор</h2>
-        <span className={styles.line}></span>
+        {/* <span className={styles.line}></span> */}
       </div>
 
       <div className={styles.calculator_skeleton}>

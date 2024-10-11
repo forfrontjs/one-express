@@ -95,7 +95,7 @@ export const Tracking: FC = () => {
       <div className={style.container}>
         <div className={style.searchSection}>
           <h2 className={style.title}>Отслеживание товара</h2>
-          <div className={style.line}></div>
+          <div className={style.lines}></div>
         </div>
         <div className={style.trackingInfo}>
           <input
