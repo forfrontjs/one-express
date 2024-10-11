@@ -1,4 +1,4 @@
-import "./Contacts.scss"
+import style from "./Contacts.module.scss"
 import logo1 from "../../../../assets/images/contacts/Phone number 1.png"
 import logo2 from "../../../../assets/images/contacts/Phone number 2.png"
 import logo3 from "../../../../assets/images/contacts/Phone number 3.png"
@@ -8,33 +8,33 @@ import  "../../../../assets/styles/_global.scss"
 
 export const Contact = () => {
   return (
-    <div className="container">
-    <div className="contact">
-        <div className="conta">
+    <div className={`${style.container} container`}>
+    <div className={style.contact}>
+        <div className={style.conta}>
             <p>Контакты</p>
             <div></div>
             
         </div>
-        <div className="adres">
-            <div className="time">
-                <div className="biw">
-                    <p className="p3">Бишкек</p>
-                    <p className="p4">пр. Чуй 119/1</p>
-                    <p className="p5">Как добраться?</p>
+        <div className={style.adres}>
+            <div className={style.time}>
+                <div className={style.biw}>
+                    <p className={style.p3}>Бишкек</p>
+                    <p className={style.p4}>пр. Чуй 119/1</p>
+                    <p className={style.p5}>Как добраться?</p>
                 </div>
-                <div className="line2"></div>
-                <div className="den">
+                <div className={style.line2}></div>
+                <div className={style.den}>
                     <div >
-                        <p className="p1">Понедельник - Суббота</p>
-                        <p className="p2">10:00 - 18:00</p></div>
+                        <p className={style.p1}>Понедельник - Суббота</p>
+                        <p className={style.p2}>10:00 - 18:00</p></div>
                     <div>
-                        <p className="p1">Воскресенье</p>
-                        <p className="p2">Выходной</p>
+                        <p className={style.p1}>Воскресенье</p>
+                        <p className={style.p2}>Выходной</p>
                     </div>
                 </div>
             </div>
             
-            <div className="phone">
+            <div className={style.phone}>
                 <div>
                     <p>Отдел поиска и выкупа товаров</p>
                     <a href="tel:+996555333883"><img src={logo1} alt="" /></a>
