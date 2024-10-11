@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { Admin } from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
+import { Profile } from "./pages/Profile/Profile";
+import Registration from "./pages/Registration/Registration";
 
 
 export const App = () => {
@@ -13,8 +15,10 @@ export const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login/>}/>
-        </Route>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/registration" element={<Registration/>}/>
           <Route path="/admin" element={<Admin />} />
+        </Route>
       </Routes>
     </>
   );

@@ -23,7 +23,7 @@
 	font-size: 20px;
 	color: #ccc;
  }
- 
+//  test
  input[type="number"]::-webkit-inner-spin-button,
  input[type="number"]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
@@ -58,7 +58,7 @@
  
  .line {
 	position: absolute;
-	width: 50%; /* Гибкая ширина, зависящая от ширины родительского контейнера */
+	width: 100%; /* Гибкая ширина, зависящая от ширины родительского контейнера */
 	height: 1px;
 	left: 70%; /* Сначала центрируем относительно родительского контейнера */
 	top: 110px;
@@ -234,9 +234,7 @@
 	  padding: 20px;
 	}
  
-.line{
-	display: none;
-}
+
 
 	.title_calculator {
 	  font-size: 2rem; 

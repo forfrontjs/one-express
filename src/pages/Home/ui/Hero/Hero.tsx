@@ -4,21 +4,38 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import title1 from "../../../../assets/images/titleImage1.png";
-import title2 from "../../../../assets/images/titleImage2.png";
-import title3 from "../../../../assets/images/titleImage3.png";
-import title4 from "../../../../assets/images/titleImage2.png";
 import { Swiper as SwiperCore } from "swiper";
+import { useGetImagesQuery } from "../../../store/loginSlice";
+
+import title1 from "./../../../../assets/images/titleImage1.png";
+import title2 from "./../../../../assets/images/titleImage2.png";
+import title3 from "./../../../../assets/images/titleImage3.png";
+import title4 from "./../../../../assets/images/titleImage2.png";
+
+interface Image {
+  id: number;
+  url: string;
+}
 
 export const Hero = () => {
-  const sliderData = [
-    { imgSrc: title1 },
-    { imgSrc: title2 },
-    { imgSrc: title3 },
-    { imgSrc: title4 },
+  const swiperRef = useRef<SwiperCore | null>(null);
+  const { data: images = [], isLoading } = useGetImagesQuery();
+
+  // Временные изображения
+  const tempImages: Image[] = [
+    { id: 1, url: title1 },
+    { id: 2, url: title2 },
+    { id: 3, url: title3 },
+    { id: 4, url: title4 },
   ];
 
-  const swiperRef = useRef<SwiperCore | null>(null);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  console.log("Полученные изображения:", images);
+
+  const Images = images.length > 0 ? images : tempImages;
 
   return (
     <section className={styles.section}>
@@ -38,12 +55,13 @@ export const Hero = () => {
             spaceBetween={20}
             slidesPerView={4}
             slidesPerGroup={1}
+            pagination={{ clickable: true }}
             loop={true}
             navigation={false}
             className={styles.swiper}
             breakpoints={{
-              368: {
-                slidesPerView: 3,
+              369: {
+                slidesPerView: 1,
               },
               768: {
                 slidesPerView: 2,
@@ -53,10 +71,10 @@ export const Hero = () => {
               },
             }}
           >
-            {sliderData.map((slide, index) => (
-              <SwiperSlide key={index}>
+            {Images.map((slide: Image) => (
+              <SwiperSlide key={slide.id}>
                 <div className={styles.card}>
-                  <img src={slide.imgSrc} alt={`Slide ${index + 1}`} />
+                  <img src={slide.url} alt={`Slide ${slide.id}`} />
                 </div>
               </SwiperSlide>
             ))}

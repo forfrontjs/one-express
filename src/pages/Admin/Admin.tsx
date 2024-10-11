@@ -1,7 +1,31 @@
 import styles from './Admin.module.scss'
 import Photo from '../../assets/images/WhatsApp Image 2024-02-27 at 11.09 1.png'
 import Delete from '../../assets/images/DeleteLogo.png'
+import { useUploadFileMutation } from '../store/AdminSlice'
+import { useState } from 'react'
 export const Admin = () => {
+  const [uploadImg, setUploadImg] = useState<File | null>(null);
+  const [uploadFile, { isLoading }] = useUploadFileMutation(); // Исправил вызов useUploadFileMutation
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0]; // Берем файл напрямую из события
+
+      setUploadImg(file); // Сохраняем файл в состояние, если понадобится
+
+      try {
+        // Отправляем файл напрямую, минуя состояние
+        await uploadFile({
+          file, // Передаем файл напрямую
+        });
+        console.log("Файл успешно загружен");
+      } catch (error) {
+        console.log("Ошибка при загрузке файла:", error);
+      }
+    }
+  };
   return (
     <div className={`${styles.container} container`}>
       <div className={styles.admin__box}>
@@ -12,6 +36,7 @@ export const Admin = () => {
             <input
               type="file"
               id="file-upload"
+              onChange={handleFileChange}
               className={styles.admin__box__upload__photo}
             />
             <label
@@ -63,7 +88,6 @@ export const Admin = () => {
                 type="date"
                 value="2024-10-10"
                 min="2024-10-10"
-                // max="2018-12-31"
               />
             </div>
             <button>Отправить</button>

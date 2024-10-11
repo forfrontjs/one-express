@@ -3,7 +3,7 @@ import styles from "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 // import { useAppDispatch } from "./store/hook";
 // import { setEmail, setPassword } from "./store/loginSlice";
-import { useLoginUserMutation } from "./store/loginSlice"; // Импортируем хук для логина
+import { useLoginUserMutation } from "../store/loginSlice"; // Импортируем хук для логина
 import iconDisabled from "./images/IconViewDisabled.png";
 import iconEnabled from "./images/visibility_16dp_686A67_FILL0_wght200_GRAD0_opsz24.png";
 
@@ -35,7 +35,7 @@ const Login: FC = () => {
 
     // Отправляем данные для проверки
     try {
-      const result = await loginUser({
+      await loginUser({
         email: inputEmail,
         password: inputPassword,
       }).unwrap();
@@ -43,7 +43,11 @@ const Login: FC = () => {
       navigate("/");
     } catch (error) {
       // Если произошла ошибка
-      setMessage(error.message);
+      if (error instanceof Error) {
+        setMessage(error.message);
+      } else {
+        setMessage("An unknown error occurred.");
+      }
     }
 
     setInputEmail("");
@@ -57,7 +61,7 @@ const Login: FC = () => {
         <form onSubmit={handleFormSubmit} className={styles.formAuthorization}>
           <label htmlFor="email" className={styles.formLabel}>
             <input
-              type="email"
+              type="text"
               id="email"
               className={styles.formInput}
               placeholder="Почта"
