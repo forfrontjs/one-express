@@ -45,7 +45,8 @@ export const Hero = () => {
           <div className={styles.line}></div>
           <p className={styles.textSecond}>Быстрая и надежная доставка товаров с Китая</p>
         </div>
-
+  
+  
         <div className={styles.wrapper}>
           <Swiper
             onSwiper={(swiperInstance) => (swiperRef.current = swiperInstance)}
