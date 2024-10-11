@@ -10,11 +10,6 @@ export const Header: FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-// const navigate = useNavigate()
-
-  // const Regist = () => {
-  //   navigate('/registation');
-  // }
 
   
   const toggleMenu = () => {

@@ -7,10 +7,10 @@ import 'swiper/css/navigation';
 import { Swiper as SwiperCore } from 'swiper';
 import { useGetImagesQuery } from '../../../Login/store/loginSlice'; 
 
-import title1 from './../../../../assets/images/titleImage1.png';
-import title2 from './../../../../assets/images/titleImage2.png';
-import title3 from './../../../../assets/images/titleImage3.png';
-import title4 from './../../../../assets/images/titleImage2.png';
+import title1 from '../../../../assets/images/titleImage1.png';
+import title2 from '../../../../assets/images/titleImage2.png';
+import title3 from '../../../../assets/images/titleImage3.png';
+import title4 from '../../../../assets/images/titleImage2.png'; // Убедитесь, что это правильный путь к изображению
 
 interface Image {
   id: number; 
@@ -19,23 +19,25 @@ interface Image {
 
 export const Hero = () => {
   const swiperRef = useRef<SwiperCore | null>(null);
-  const { data: images = [],  isLoading } = useGetImagesQuery();
+  const { data: images = [], isLoading } = useGetImagesQuery(); 
 
-  // Временные изображения на случай отсутствия данных
-  const tempImages: Image[] = [
+  // Логирование массива картинок
+  console.log('Images received:', images);
+
+  if (isLoading) {
+    return <div>Loading...</div>; 
+  }
+
+
+  // Если нет изображений, покажем временные изображения
+  const fallbackImages: Image[] = [
     { id: 1, url: title1 }, 
     { id: 2, url: title2 },
     { id: 3, url: title3 },
     { id: 4, url: title4 },
   ];
 
-  if (isLoading) {
-    return <div>Loading...</div>; 
-  }
-
-  console.log('Полученные изображения:', images); 
-
-  const Images = images.length > 0 ? images : tempImages; // Используем полученные или временные изображения
+  const finalImages = images.length > 0 ? images : fallbackImages;
 
   return (
     <section className={styles.section}>
@@ -45,8 +47,7 @@ export const Hero = () => {
           <div className={styles.line}></div>
           <p className={styles.textSecond}>Быстрая и надежная доставка товаров с Китая</p>
         </div>
-  
-  
+
         <div className={styles.wrapper}>
           <Swiper
             onSwiper={(swiperInstance) => (swiperRef.current = swiperInstance)}
@@ -70,7 +71,7 @@ export const Hero = () => {
               },
             }}
           >
-            {Images.map((slide: Image) => (
+            {finalImages.map((slide: Image) => (
               <SwiperSlide key={slide.id}>
                 <div className={styles.card}>
                   <img src={slide.url} alt={`Slide ${slide.id}`} />
