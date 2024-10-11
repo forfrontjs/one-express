@@ -49,8 +49,7 @@ export const Contact = () => {
                 </div>
             </div>
         </div>
-{/*         
-        <div className="navi"></div> */}
+
     </div>
     </div>);
 };

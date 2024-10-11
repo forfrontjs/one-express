@@ -1,7 +1,5 @@
-// import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.scss"
-
 import logo from "../../assets/images/footer/Logotype.png"
 import tele from "../../assets/images/footer/Telegram.png"
 import inst from "../../assets/images/footer/Instagram (1).png"
