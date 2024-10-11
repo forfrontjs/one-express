@@ -6,8 +6,10 @@ import { Admin } from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
 import { Profile } from "./pages/Profile/Profile";
 
+
 export const App = () => {
   return (
+    <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -17,5 +19,6 @@ export const App = () => {
         </Route>
       </Routes>
 
-  ) 
-  }
+    </>
+  )
+}
