@@ -76,7 +76,7 @@
       align-items: center;
       gap: 30px;
       text-align: center;
-      margin-top: 100px; // Увеличили отступ, чтобы меню не перекрывалось бургер-иконкой
+      margin-top: 100px; 
 
       .navItem {
         font-size: 24px;
@@ -96,7 +96,7 @@
     }
   }
 
-  // Открытое состояние меню
+
   .navOpen {
     display: flex !important;
     position: fixed;
@@ -134,12 +134,12 @@
       }
 
       @media (max-width: 768px) {
-        display: none;  // Прячем кнопку входа на мобильных
+        display: none;  
       }
     }
   }
 
-  // Адаптируем бургер-меню
+  
   .burgerMenu {
     display: none;
     cursor: pointer;
@@ -195,7 +195,7 @@
     }
   }
 
-  // Десктопная версия
+
   @media (min-width: 769px) {
     .navOpen {
       display: flex !important;

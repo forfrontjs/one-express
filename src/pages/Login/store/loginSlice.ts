@@ -27,7 +27,7 @@ export interface Image {
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_APP_API_URL, 
+    baseUrl: import.meta.env.VITE_API_APP_URL, 
     prepareHeaders: (headers) => {
       headers.set('Content-Type', 'application/json');
       return headers;
