@@ -91,7 +91,7 @@ export const Tracking: FC = () => {
   };
 
   return (
-    <section className={style.wrapper}>
+    <section className={style.wrapper} id='tracking'>
       <div className={style.container}>
         <div className={style.searchSection}>
           <h2 className={style.title}>Отслеживание товара</h2>

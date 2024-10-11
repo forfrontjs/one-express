@@ -46,7 +46,7 @@ export const Header: FC<HeaderProps> = () => {
               </a>
             </li>
             <li className={styles.navItem}>
-              <a href="#Tracking" className={styles.link}>
+              <a href="#tracking" className={styles.link}>
                 Отслеживание
               </a>
             </li>
