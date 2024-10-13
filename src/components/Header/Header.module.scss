@@ -11,10 +11,9 @@
   top: 0;
   z-index: 1000;
 
-  // Адаптация для мобильных устройств
   @media (max-width: 768px) {
     padding: 10px 20px;
-    height: auto;  // Автоматическая высота для гибкости
+    height: auto; 
   }
 
   .container {
@@ -29,6 +28,7 @@
   .logo {
     width: 100px;
     margin-left: 30px;
+    margin-top: 17px;
 
     img {
       width: 100%;
@@ -36,7 +36,7 @@
     }
 
     @media (max-width: 768px) {
-      width: 80px;  // Уменьшение логотипа на мобильных
+      width: 80px;  
       margin-left: 10px;
     }
   }
@@ -47,7 +47,7 @@
 
     .navList {
       display: flex;
-      gap: 40px;
+      gap: 60px;
       list-style: none;
       padding: 0px;
       margin: 20px;
@@ -64,7 +64,7 @@
         font-family: "Noto-Sans", sans-serif;
       }
 
-      // Прячем меню на мобильных устройствах
+      
       @media (max-width: 768px) {
         display: none;
       }
@@ -89,7 +89,7 @@
           text-align: center;
         }
 
-        &:hover {
+        &:active {
           color: #ffda00;
         }
       }
@@ -116,6 +116,7 @@
       display: inline-block;
       padding: 1px 16px;
       font-size: 16px;
+      margin-right: 78px;
       cursor: pointer;
       border: 1px solid #282b26;
       width: 194px;
@@ -160,13 +161,7 @@
       margin: 5px 0;
       transition: transform 0.3s ease, background-color 0.3s ease;
     }
-    // .burgerLeft{
-    //   width: 15px;
-    // }
-    // .burgerRight{
-    //   width: 15px;
-    //   margin-left:15px;
-    // }
+    
 
     &.open .burgerIcon:nth-child(1) {
       transform: rotate(45deg) translateY(12px);
