@@ -1,3 +1,4 @@
+
 import "./assets/styles/index.scss"
 import { Home } from "./pages/Home/Home"
 import { Route, Routes } from "react-router-dom";
@@ -20,7 +21,6 @@ export const App = () => {
           <Route path="/registration" element={<Registration/>}  />        
         </Route>
       </Routes>
-
     </>
   )
 }
