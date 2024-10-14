@@ -10,7 +10,7 @@ export const Header: FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const isAdminPage = location.pathname === '/Admin';
+  const isAdminPage = location.pathname === "/Admin";
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -59,11 +59,15 @@ export const Header: FC<HeaderProps> = () => {
                   Контакты
                 </a>
               </li>
-              
+
               {menuOpen && (
                 <>
                   <li className={styles.navItem}>
-                    <Link to="/profile" className={styles.link} onClick={toggleMenu}>
+                    <Link
+                      to="/profile"
+                      className={styles.link}
+                      onClick={toggleMenu}
+                    >
                       Личный профиль
                     </Link>
                   </li>
@@ -80,24 +84,37 @@ export const Header: FC<HeaderProps> = () => {
 
             {menuOpen && (
               <div className={styles.socialLinks}>
-                <a href="https://telegram.org" target="_blank" rel="noopener noreferrer">
-                </a>
-                <a href="https://vk.com" target="_blank" rel="noopener noreferrer">
-                </a>
+                <a
+                  href="https://telegram.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                ></a>
+                <a
+                  href="https://vk.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                ></a>
               </div>
             )}
           </nav>
         )}
 
-        <div className={`${styles.burgerMenu} ${menuOpen ? styles.open : ""}`} onClick={toggleMenu}>
+        <div
+          className={`${styles.burgerMenu} ${menuOpen ? styles.open : ""}`}
+          onClick={toggleMenu}
+        >
           <div className={`${styles.burgerIcon} ${styles.burgerLeft}`}></div>
           <div className={styles.burgerIcon}></div>
           <div className={`${styles.burgerIcon} ${styles.burgerRight}`}></div>
         </div>
 
         <div className={styles.login}>
-          <Link to={isAdminPage ? '/login' : '/registration'} className={styles.loginButton} onClick={handleLogin}>
-            {isAdminPage ? "Войти" : (loggedIn ? "Профиль" : "Вход")}
+          <Link
+            to={isAdminPage ? "/login" : "/registration"}
+            className={styles.loginButton}
+            onClick={handleLogin}
+          >
+            {isAdminPage ? "Войти" : loggedIn ? "Профиль" : "Вход"}
           </Link>
         </div>
       </div>
