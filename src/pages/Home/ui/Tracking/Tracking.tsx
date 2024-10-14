@@ -12,28 +12,23 @@ interface ParcelData {
   trackingHistory: TrackingData[];
 }
 
-// interface APIResponse {
-//   status: string;
-//   dateCreated: string;
-//   dateUpdated?: string;
-// }
-
-// const getRandomDate = (start: Date, end: Date) => {
-//   const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-//   return date.toISOString();
-// };
+// Функция для получения случайной даты
+const getRandomDate = (start: Date, end: Date) => {
+  const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  return date.toISOString().split('T')[0]; // Формат YYYY-MM-DD
+};
 
 const getRandomStatus = () => {
-  const statuses = ["in_storage", "on_the_way", "delivered"]
-  return statuses[Math.floor(Math.random() * statuses.length)]
-}
+  const statuses = ['in_storage', 'on_the_way', 'delivered'];
+  return statuses[Math.floor(Math.random() * statuses.length)];
+};
 
 export const Tracking: FC = () => {
   const [trackingCode, setTrackingCode] = useState('');
+  const [error, setError] = useState('');
   const [parcelData, setParcelData] = useState<ParcelData | null>(null);
   const [history, setHistory] = useState<string[]>([]);
   const [showHistory, setShowHistory] = useState(false);
-  const [error, setError] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -59,13 +54,11 @@ export const Tracking: FC = () => {
     setError('');
 
     const status = getRandomStatus();
-    // const dateCreated = getRandomDate(new Date(2024, 5, 1), new Date(2024, 6, 1));
-    // const dateUpdated = status === "delivered" ? getRandomDate(new Date(2024, 6, 1), new Date()) : undefined;
 
     const trackingHistory: TrackingData[] = [
-      { date: '2024-06-20', status: 'Поступил на склад' },
-      { date: '2024-06-25', status: 'В пути' },
-      { date: '2024-07-12', status: status === "delivered" ? 'Прибыл в Бишкек' : 'На складе' },
+      { date: getRandomDate(new Date(2024, 5, 1), new Date(2024, 6, 1)), status: 'Поступил на склад' },
+      { date: getRandomDate(new Date(2024, 6, 1), new Date(2024, 6, 30)), status: 'В пути' },
+      { date: getRandomDate(new Date(2024, 6, 30), new Date()), status: status === 'delivered' ? 'Прибыл в Бишкек' : 'На складе' },
     ];
 
     const mockedData: ParcelData = {
@@ -80,7 +73,7 @@ export const Tracking: FC = () => {
   };
 
   const removeFromHistory = (code: string, event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
+    event.stopPropagation(); 
     setIsDeleting(true);
     const updatedHistory = history.filter((item) => item !== code);
     setHistory(updatedHistory);
@@ -91,25 +84,29 @@ export const Tracking: FC = () => {
     }, 200);
   };
 
-  const handleHistoryClick = (code: string) => {
+  const handleHistoryClick = (code: string, event: React.MouseEvent<HTMLLIElement>) => {
+    event.stopPropagation(); // Остановить всплытие события
     setTrackingCode(code);
     setShowHistory(false);
   };
 
   return (
-    <section className={style.wrapper}>
+    <section className={style.wrapper} id='tracking'>
       <div className={style.container}>
         <div className={style.searchSection}>
           <h2 className={style.title}>Отслеживание товара</h2>
-          <div className={style.line}></div>
+          <div className={style.lines}></div>
         </div>
         <div className={style.trackingInfo}>
           <input
             className={style.searchInp}
             type="text"
-            placeholder="Введите трек-код"
             value={trackingCode}
-            onChange={(e) => setTrackingCode(e.target.value)}
+            placeholder={error || "Введите трек-код"}
+            onChange={(e) => {
+              setTrackingCode(e.target.value);
+              if (error) setError(''); // Сбрасываем ошибку при вводе
+            }}
             onFocus={() => setShowHistory(true)}
             onBlur={() => {
               if (!isDeleting) setTimeout(() => setShowHistory(false), 200);
@@ -118,13 +115,12 @@ export const Tracking: FC = () => {
           <button onClick={handleTrack} className={style.searchButton}>
             ОТСЛЕДИТЬ
           </button>
-          {error && <p className={style.error}>{error}</p>}
 
           {showHistory && history.length > 0 && (
             <div className={style.history}>
               <ul>
                 {history.map((code, index) => (
-                  <li key={index} className={style.historyItem} onClick={() => handleHistoryClick(code)}>
+                  <li key={index} className={style.historyItem} onClick={(e) => handleHistoryClick(code, e)}>
                     {code}
                     <button
                       onMouseDown={(e) => removeFromHistory(code, e)}
@@ -141,34 +137,41 @@ export const Tracking: FC = () => {
 
         {parcelData && (
           <div className={style.result}>
-            <h3 className={style.info_title}>Информация о посылке</h3>
             <div className={style.trackingTable}>
               <div className={style.trackingRow}>
                 <div className={style.trackingCellHeader}>Дата</div>
-                <div className={style.trackingCellHeader}>Статус</div>
-                <div className={style.trackingCellHeader}>Персональный код</div>
-                <div className={style.trackingCellHeader}>Трек-код</div>
-              </div>
-              {parcelData.trackingHistory.map((data, index) => (
-                <div className={style.trackingRow} key={index}>
-                  <div className={style.trackingCell}>
-                    {new Date(data.date).toLocaleDateString('ru-RU')}
-                  </div>
-                  <div className={style.trackingCell}>
-                    <div className={style.statusWithDot}>{data.status}</div>
-                  </div>
-                  {index === 0 && (
-                    <>
-                      <div className={style.trackingCell} style={{ flex: 1 }}>
-                        {parcelData.personalCode}
-                      </div>
-                      <div className={style.trackingCell} style={{ flex: 1 }}>
-                        {parcelData.trackingCode}
-                      </div>
-                    </>
-                  )}
+                <div className={style.trackingCell}>
+                  {parcelData.trackingHistory.map((data, index) => (
+                    <div key={index}>{new Date(data.date).toLocaleDateString('ru-RU')}</div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div className={style.trackingRow}>
+                <div className={style.trackingCellHeader}>Статус</div>
+                <div className={style.trackingCell}>
+                  {parcelData.trackingHistory.map((data, index) => (
+                    <div key={index} className={style.trackingStatusIndicator}>
+                      <div className={style.statusDot}></div>
+                      <div className={style.statusDescription}>{data.status}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={style.trackingRow}>
+                <div className={style.trackingCellHeader}>Персональный код</div>
+                <div className={style.trackingCell}>
+                  <div>{parcelData.personalCode}</div>
+                </div>
+              </div>
+
+              <div className={style.trackingRow}>
+                <div className={style.trackingCellHeader}>Трек-код</div>
+                <div className={style.trackingCell}>
+                  <div>{parcelData.trackingCode}</div>
+                </div>
+              </div>
             </div>
           </div>
         )}

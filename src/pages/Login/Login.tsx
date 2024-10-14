@@ -29,7 +29,6 @@ const Login: FC = () => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Проверка заполнения полей перед отправкой запроса
     if (!inputEmail || !inputPassword) {
       setMessage("Все поля должны быть заполнены!");
       return;
@@ -61,7 +60,7 @@ const Login: FC = () => {
         <form onSubmit={handleFormSubmit} className={styles.formAuthorization}>
           <label htmlFor="email" className={styles.formLabel}>
             <input
-              type="email"
+              type="text"
               id="email"
               className={styles.formInput}
               placeholder="Почта"
