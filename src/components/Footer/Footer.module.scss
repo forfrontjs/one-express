@@ -58,4 +58,21 @@
     
   }
   
-  
+  @media (max-width: 768px){
+
+    .firstlogo {
+      width: 48px;
+      height: 48px;
+    }
+
+    .sociallogos {
+      width: 24px;
+      height: 24px;
+    }
+
+    .social {
+      width: 73px;
+      height: 24px;
+      
+    }
+  }

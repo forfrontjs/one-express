@@ -7,6 +7,34 @@ import  "../../../../assets/styles/_global.scss"
 
 
 export const Contact = () => {
+
+    function replaceParagraphTextByClass() {
+        const paragraphs = document.querySelectorAll('.voskr'); 
+        paragraphs.forEach(p => {
+            p.textContent = 'Воскр'; 
+        });
+
+        const paragraphs2 = document.querySelectorAll('.poned'); 
+        paragraphs2.forEach(p => {
+            p.textContent = 'Пон - Субб'; 
+        });
+    }
+    
+   
+    function checkScreenSize() {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          
+            replaceParagraphTextByClass();
+        }
+    }
+    
+    checkScreenSize();
+
+    window.addEventListener('resize', checkScreenSize);
+
+
+
+
   return (
     <div className={`${style.container} container`}>
     <div className={style.contact}>
@@ -25,10 +53,10 @@ export const Contact = () => {
                 <div className={style.line2}></div>
                 <div className={style.den}>
                     <div >
-                        <p className={style.p1}>Понедельник - Суббота</p>
+                        <p className={`${style.p1} poned`}>Понедельник - Суббота</p>
                         <p className={style.p2}>10:00 - 18:00</p></div>
                     <div>
-                        <p className={style.p1}>Воскресенье</p>
+                        <p className={`${style.p1} voskr`}>Воскресенье</p>
                         <p className={style.p2}>Выходной</p>
                     </div>
                 </div>

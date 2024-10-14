@@ -7,6 +7,23 @@ import inst from "../../assets/images/footer/Instagram (1).png"
 import "../../assets/styles/_global.scss"
 
 export const Footer = () => {
+
+  function removeParagraph() {
+    const paragraphs = document.querySelectorAll('nav'); 
+    paragraphs.forEach(nav => nav.remove()); 
+}
+
+function checkScreenSize() {
+  if (window.matchMedia('(max-width: 768px)').matches) {
+      removeParagraph();
+  }
+}
+
+checkScreenSize();
+
+window.addEventListener('resize', checkScreenSize);
+
+
   return (
         
     <div className={style.footer} >
