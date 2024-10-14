@@ -1,24 +1,28 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// Интерфейс для пользователя
 interface User {
   id: number;
   name: string;
   email: string;
+  password: string;
 }
 
-// Интерфейс для логина
-interface LoginPayload {
+interface LoginRequest {
   email: string;
   password: string;
 }
 
-// Интерфейс для ответа на запрос логина
 interface LoginResponse {
   user: User;
+  token: string;
 }
 
-// Интерфейс для изображений
+interface NewUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export interface Image {
   id: number;
   url: string;
@@ -26,37 +30,45 @@ export interface Image {
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_APP_URL, 
-    prepareHeaders: (headers) => {
-      headers.set('Content-Type', 'application/json');
-      return headers;
-    },
-    // Обработка ошибок
-    fetchFn: async (input, init) => {
-      const response = await fetch(input, init);
-      if (!response.ok) {
-        const error = await response.text();
-        throw new Error(`Ошибка: ${response.status} - ${error}`);
-      }
-      return response;
-    },
-  }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_URL }),
   endpoints: (builder) => ({
-    getUsers: builder.query<User[], void>({
-      query: () => '/users',
-    }),
-    loginUser: builder.mutation<LoginResponse, LoginPayload>({
+    loginUser: builder.mutation<LoginResponse, LoginRequest>({
       query: ({ email, password }) => ({
-        url: '/auth/login',
-        method: 'POST',
+        url: "test/auth/login",
+        method: "POST",
         body: { email, password },
       }),
+      transformResponse: (response: {
+        user: User;
+        access_token: string;
+      }): LoginResponse => {
+        console.log(response);
+
+        localStorage.setItem("accesToken", response.access_token);
+
+        return {
+          user: response.user,
+          token: response.access_token,
+        };
+      },
+    }),
+
+    registerUser: builder.mutation<User, NewUser>({
+      query: (newUser) => ({
+        url: "/register",
+        method: "POST",
+        body: newUser,
+      }),
+      transformResponse: (response: { user: User }) => response.user,
     }),
     getImages: builder.query<Image[], void>({
-      query: () => '/uploads',
+      query: () => "/uploads",
     }),
   }),
 });
 
-export const { useGetUsersQuery, useLoginUserMutation, useGetImagesQuery } = apiSlice;
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useGetImagesQuery,
+} = apiSlice;
