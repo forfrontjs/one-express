@@ -1,15 +1,20 @@
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import styles from "./Registration.module.scss";
 import { Link, useNavigate } from "react-router-dom";
+import iconDisabled from "../Login/images/IconViewDisabled.png";
+import iconEnabled from "../Login/images/visibility_16dp_686A67_FILL0_wght200_GRAD0_opsz24.png";
 import { useRegisterUserMutation } from "../Login/store/loginSlice";
 
 const Registration: FC = () => {
   const [inputFullname, setInputFullname] = useState<string>("");
-  const [inputAddress, setInputAddress] = useState("");
-  const [inputPhoneNumber, setInputPhoneNumber] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputPassword, setInputPassword] = useState("");
-  const [inputConfirmPassword, setInputConfirmPassword] = useState("");
+  const [inputAddress, setInputAddress] = useState<string>("");
+  const [inputPhoneNumber, setInputPhoneNumber] = useState<string>("");
+  const [inputEmail, setInputEmail] = useState<string>("");
+  const [inputPassword, setInputPassword] = useState<string>("");
+  const [inputConfirmPassword, setInputConfirmPassword] = useState<string>("");
+  const [inputType, setInputType] = useState<"password" | "text">("password");
+  const [message, setMessage] = useState<string>("");
+
   const navigate = useNavigate();
 
   const [registerUser] = useRegisterUserMutation();
@@ -36,6 +41,10 @@ const Registration: FC = () => {
     setInputConfirmPassword(e.target.value);
   };
 
+  const handlePasswordShow = () => {
+    setInputType((prevType) => (prevType === "password" ? "text" : "password"));
+  };
+
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (
@@ -46,7 +55,7 @@ const Registration: FC = () => {
       !inputPassword ||
       !inputConfirmPassword
     ) {
-      alert("Пожалуйста, заполните все поля!");
+      setMessage("Пожалуйста, заполните все поля!");
       return;
     }
 
@@ -59,18 +68,14 @@ const Registration: FC = () => {
     };
 
     if (inputPassword !== inputConfirmPassword) {
-      alert("Пароли не совпадают!");
+      setMessage("Пароли не совпадают!");
       return;
+    } else if (inputPassword.length && inputConfirmPassword.length < 6) {
+      return setMessage("Пароль должен быть не менее 6 символов!!!");
     }
 
     try {
       await registerUser(newUser).unwrap();
-
-      const storedUsers = JSON.parse(localStorage.getItem("mockUsers") || "[]");
-
-      const updatedUsers = [...storedUsers, newUser];
-
-      localStorage.setItem("mockUsers", JSON.stringify(updatedUsers));
 
       alert("Регистрация прошла успешно!");
 
@@ -142,26 +147,39 @@ const Registration: FC = () => {
             <label className={styles.formLabel} htmlFor="password">
               <input
                 className={styles.formInput}
-                type="password"
+                type={inputType}
                 id="password"
                 placeholder="Пароль (не менее 6 символов)"
                 value={inputPassword}
                 onChange={handlePasswordChange}
               />
+              <img
+                onClick={handlePasswordShow}
+                className={styles.showPassword}
+                src={inputType === "password" ? iconEnabled : iconDisabled}
+                alt="Скрыть/показать пароль"
+              />
             </label>
             <label className={styles.formLabel} htmlFor="confirmPassword">
               <input
                 className={styles.formInput}
-                type="password"
+                type={inputType}
                 id="confirmPassword"
                 placeholder="Повторите пароль"
                 value={inputConfirmPassword}
                 onChange={handleConfirmPasswordChange}
               />
+              <img
+                onClick={handlePasswordShow}
+                className={styles.showPassword}
+                src={inputType === "password" ? iconEnabled : iconDisabled}
+                alt="Скрыть/показать пароль"
+              />
             </label>
           </div>
           <button className={styles.formButton}>Регистрация</button>
         </form>
+        {message && <p className={styles.message}>{message}</p>}
         <div className={styles.registrationText}>
           <p className={styles.questionsText}>Уже есть аккаунт?</p>
           <Link className={styles.loginLink} to={"/login"}>

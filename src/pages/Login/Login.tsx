@@ -29,24 +29,29 @@ const Login: FC = () => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Проверка заполнения полей перед отправкой запроса
+    if (!inputEmail || !inputPassword) {
+      setMessage("Все поля должны быть заполнены!");
+      return;
+    }
+
     try {
       await loginUser({
         email: inputEmail,
         password: inputPassword,
       }).unwrap();
+
       navigate("/");
+
+      setInputEmail("");
+      setInputPassword("");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setMessage(error.message || "Произошла ошибка при авторизации.");
-      } else if (!inputEmail || !inputPassword) {
-        setMessage("Все поля должны быть заполнены!");
       } else {
         setMessage("Неверный email или пароль!");
       }
     }
-
-    setInputEmail("");
-    setInputPassword("");
   };
 
   return (

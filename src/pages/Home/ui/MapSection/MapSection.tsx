@@ -10,7 +10,7 @@ const MapSection: React.FC = () => {
   const position: [number, number] = [42.87563257447988, 74.6262935];
 
   const customMarkerIcon = L.icon({
-    iconUrl: "/src/assets/images/Vector.png",
+    iconUrl: "/src/assets/images/Location icon.png",
     iconSize: [30, 40],
     iconAnchor: [15, 30],
     popupAnchor: [0, -30],
@@ -33,7 +33,6 @@ const MapSection: React.FC = () => {
         })
         .addTo(map);
 
-      // Настройка для горизонтального отображения
       const zoomControlContainer = document.querySelector(
         ".leaflet-control-zoom"
       );

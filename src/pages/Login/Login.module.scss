@@ -61,6 +61,10 @@
   color: #a1a1a1;
   border: none;
 }
+.formInput::placeholder {
+  text-align: left;
+  color: #a1a1a1;
+}
 
 .formInput:focus {
   outline: none;
