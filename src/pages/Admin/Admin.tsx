@@ -3,7 +3,7 @@ import Photo from '../../assets/images/WhatsApp Image 2024-02-27 at 11.09 1.png'
 import Delete from '../../assets/images/DeleteLogo.png'
 export const Admin = () => {
   return (
-    <div className={`${styles.container} container`}>
+    <div  className={`${styles.container} container`}>
       <div className={styles.admin__box}>
         <h1>Панель администрации</h1>
         <div className={styles.admin__box__carousel}>

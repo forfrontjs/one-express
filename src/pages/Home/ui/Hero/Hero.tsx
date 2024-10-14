@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import styles from './Hero.module.scss';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -7,10 +7,10 @@ import 'swiper/css/navigation';
 import { Swiper as SwiperCore } from 'swiper';
 import { useGetImagesQuery } from '../../../Login/store/loginSlice'; 
 
-import title1 from './../../../../assets/images/titleImage1.png'
-import title2 from './../../../../assets/images/titleImage2.png'
-import title3 from './../../../../assets/images/titleImage3.png'
-import title4 from './../../../../assets/images/titleImage2.png'
+import title1 from '../../../../assets/images/titleImage2.png';
+import title2 from '../../../../assets/images/titleImage2.png';
+import title3 from '../../../../assets/images/titleImage2.png';
+import title4 from '../../../../assets/images/titleImage2.png'; 
 
 interface Image {
   id: number; 
@@ -19,33 +19,27 @@ interface Image {
 
 export const Hero = () => {
   const swiperRef = useRef<SwiperCore | null>(null);
-  const { data: images = [],  isLoading } = useGetImagesQuery();
+  const { data: images = [], isLoading } = useGetImagesQuery(); 
 
-  // Временные изображения
-  const tempImages: Image[] = [
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  if (isLoading) {
+    return <div>Loading...</div>; 
+  }
+
+ 
+  const fallbackImages: Image[] = [
     { id: 1, url: title1 }, 
     { id: 2, url: title2 },
     { id: 3, url: title3 },
     { id: 4, url: title4 },
   ];
 
-  
-  if (isLoading) {
-    return <div>Loading...</div>; 
-  }
-
-  
-  
-
-   
-
-  console.log('Полученные изображения:', images); 
-
-
-  const Images = images.length > 0 ? images : tempImages;
+  const finalImages = images.length > 0 ? images : fallbackImages;
 
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section}container`}>
       <div className={styles.container}>
         <div className={styles.title}>
           <h2 className={styles.textFirst}>ONE EXPRESS</h2>
@@ -58,27 +52,34 @@ export const Hero = () => {
             onSwiper={(swiperInstance) => (swiperRef.current = swiperInstance)}
             modules={[Navigation]}
             spaceBetween={20}
-            slidesPerView={4}
+            slidesPerView={3}
             slidesPerGroup={1}
             pagination={{ clickable: true }}
+            centeredSlides={true} 
             loop={true}
             navigation={false}
             className={styles.swiper}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             breakpoints={{
               369: {
                 slidesPerView: 1,
+                centeredSlides: false, 
               },
               768: {
                 slidesPerView: 2,
+                centeredSlides: false,
               },
               1024: {
                 slidesPerView: 3,
+                centeredSlides: true, 
               },
             }}
           >
-            {Images.map((slide: Image) => (
+            {finalImages.map((slide: Image, index: number) => (
               <SwiperSlide key={slide.id}>
-                <div className={styles.card}>
+                <div
+                  className={`${styles.card} ${index === activeIndex ? styles.active : ''}`} // Добавляем класс для активного слайда
+                >
                   <img src={slide.url} alt={`Slide ${slide.id}`} />
                 </div>
               </SwiperSlide>
@@ -121,4 +122,3 @@ export const Hero = () => {
     </section>
   );
 };
-

@@ -73,7 +73,7 @@ export const Tracking: FC = () => {
   };
 
   const removeFromHistory = (code: string, event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation(); // Остановить всплытие события
+    event.stopPropagation(); 
     setIsDeleting(true);
     const updatedHistory = history.filter((item) => item !== code);
     setHistory(updatedHistory);
