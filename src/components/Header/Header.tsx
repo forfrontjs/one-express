@@ -28,7 +28,6 @@ export const Header: FC<HeaderProps> = () => {
       document.body.style.overflow = "auto";
     };
   }, [menuOpen]);
-
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -134,3 +133,5 @@ export const Header: FC<HeaderProps> = () => {
     </header>
   );
 };
+
+<div>{/* Header component */}</div>;
