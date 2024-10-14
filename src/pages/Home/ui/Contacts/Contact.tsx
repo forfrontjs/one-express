@@ -8,7 +8,7 @@ import  "../../../../assets/styles/_global.scss"
 
 export const Contact = () => {
   return (
-    <div className={`${style.container} container`}>
+    <div id="Contact" className={`${style.container} container`}>
     <div className={style.contact}>
         <div className={style.conta}>
             <p>Контакты</p>
