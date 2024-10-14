@@ -49,7 +49,7 @@
   transition: border-color 0.3s;
 
   &::placeholder {
-    color: gray;
+    color: rgb(255, 0, 0);
   }
 
   &:focus {
