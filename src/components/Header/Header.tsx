@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { Link, useLocation } from "react-router-dom";
-
 import styles from "./Header.module.scss";
 import headerLink from "../../assets/images/LogoHeader.png";
 import instaLogo from '../../assets/images/instalogo.svg'
