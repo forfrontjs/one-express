@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import styles from './Profile.module.scss';
 console.log(styles);
@@ -83,15 +84,8 @@ const Profile: React.FC = () => {
             <div className={styles.NumberSom}>0 сом</div>
             </div>
         </div>
-        
-        
       </div>
-
- 
-
-    
     </div>
   );
 };
-
 export default Profile; // Экспортируем по умолчанию
