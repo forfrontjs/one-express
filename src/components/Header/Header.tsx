@@ -1,8 +1,11 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./Header.module.scss";
+import { FC, useState } from "react";
+import { HashLink } from "react-router-hash-link";
 import { Link, useLocation } from "react-router-dom";
-import headerLink from "../../assets/images/LogoHeader.png";
 
+import styles from "./Header.module.scss";
+import headerLink from "../../assets/images/LogoHeader.png";
+import instaLogo from '../../assets/images/instalogo.svg'
+import telegramLogo from '../../assets/images/tegramlogo.svg'
 interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = () => {
@@ -19,14 +22,10 @@ export const Header: FC<HeaderProps> = () => {
   const handleLogin = () => {
     setLoggedIn(!loggedIn);
   };
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [menuOpen]);
-
+  
+  const CloseMenu = () => {
+    setMenuOpen(false)
+  }
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -40,26 +39,26 @@ export const Header: FC<HeaderProps> = () => {
           <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
             <ul className={styles.navList}>
               <li className={styles.navItem}>
-                <a href="#" className={styles.link}>
+                <HashLink smooth to="/#" className={styles.link} onClick={CloseMenu}>
                   Главная
-                </a>
+                </HashLink>
               </li>
               <li className={styles.navItem}>
-                <a href="#Calculator" className={styles.link}>
+                <HashLink smooth to="/#Calculator" className={styles.link} onClick={CloseMenu}>
                   Калькулятор
-                </a>
+                </HashLink>
               </li>
               <li className={styles.navItem}>
-                <a href="#tracking" className={styles.link}>
+                <HashLink smooth to="/#tracking" className={styles.link} onClick={CloseMenu}>
                   Отслеживание
-                </a>
+                </HashLink>
               </li>
               <li className={styles.navItem}>
-                <a href="#Contacts" className={styles.link}>
+                <HashLink smooth to="/#Contact" className={styles.link} onClick={CloseMenu}>
                   Контакты
-                </a>
+                </HashLink>
               </li>
-              
+
               {menuOpen && (
                 <>
                   <li className={styles.navItem}>
@@ -80,10 +79,10 @@ export const Header: FC<HeaderProps> = () => {
 
             {menuOpen && (
               <div className={styles.socialLinks}>
-                <a href="https://telegram.org" target="_blank" rel="noopener noreferrer">
-                </a>
-                <a href="https://vk.com" target="_blank" rel="noopener noreferrer">
-                </a>
+                <a  className={styles.socialLinks} href="https://telegram.org" target="_blank" rel="noopener noreferrer">
+                <img src={instaLogo}/></a>
+                <a className={styles.socialLinks} href="https://instagram.org" target="_blank" rel="noopener noreferrer">
+                <img src={telegramLogo}/></a>
               </div>
             )}
           </nav>
