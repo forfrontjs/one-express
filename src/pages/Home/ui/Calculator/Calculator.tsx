@@ -76,7 +76,7 @@ export const Calculator: React.FC = () => {
 	              className={`${styles.button_Calculator2} ${!isDensityMode ? styles.active : ""}`}
 	              onClick={activateVolumeMode}
 	            >
-	              <span className={styles.text_Calculator}>Объем груза (м³)</span>
+	              <span className={styles.text_Calculator}> Объем груза (м³)</span>
 	            </button>
 	            <button
 	              className={`${styles.button_Calculator1} ${isDensityMode ? styles.active : ""}`}
@@ -199,3 +199,4 @@ export const Calculator: React.FC = () => {
 };
 
 export default Calculator;
+ 
