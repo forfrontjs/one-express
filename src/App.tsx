@@ -5,7 +5,6 @@ import { Layout } from "./components/Layout/Layout";
 import { Admin } from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
 
-// import { Profile } from "./pages/Profile";
 import Profile from "./pages/Profile/Profile";
 
 import Registration from "./pages/Registration/Registration";

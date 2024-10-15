@@ -59,6 +59,16 @@ const Registration: FC = () => {
       return;
     }
 
+    if (inputPassword !== inputConfirmPassword) {
+      setMessage("Пароли не совпадают!");
+      return;
+    }
+
+    if (inputPassword.length < 6) {
+      setMessage("Пароль должен быть не менее 6 символов!!!");
+      return;
+    }
+
     const newUser = {
       name: inputFullname,
       address: inputAddress,
@@ -66,13 +76,6 @@ const Registration: FC = () => {
       email: inputEmail,
       password: inputPassword,
     };
-
-    if (inputPassword !== inputConfirmPassword) {
-      setMessage("Пароли не совпадают!");
-      return;
-    } else if (inputPassword.length && inputConfirmPassword.length < 6) {
-      return setMessage("Пароль должен быть не менее 6 символов!!!");
-    }
 
     try {
       await registerUser(newUser).unwrap();
@@ -85,10 +88,16 @@ const Registration: FC = () => {
       setInputEmail("");
       setInputPassword("");
       setInputConfirmPassword("");
+      setMessage("");
       navigate("/");
-    } catch (error) {
-      console.error("Ошибка при регистрации:", error);
-      alert("Ошибка при регистрации! Попробуйте снова.");
+    } catch (error: any) {
+      if (error.status === 400) {
+        setMessage(
+          "Ошибка регистрации. Возможно, такой пользователь уже существует."
+        );
+      } else {
+        setMessage("Ошибка при регистрации! Попробуйте снова.");
+      }
     }
   };
 

@@ -2,9 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface User {
   id: number;
-  name: string;
   email: string;
-  password: string;
+  name: string;
+  phone: string;
+  residenceCity: string;
+  role: "user_role";
 }
 
 interface LoginRequest {
@@ -18,8 +20,10 @@ interface LoginResponse {
 }
 
 interface NewUser {
-  name: string;
   email: string;
+  name: string;
+  phone: string;
+  address: string;
   password: string;
 }
 
@@ -55,12 +59,13 @@ export const apiSlice = createApi({
 
     registerUser: builder.mutation<User, NewUser>({
       query: (newUser) => ({
-        url: "/register",
+        url: "/users",
         method: "POST",
         body: newUser,
       }),
       transformResponse: (response: { user: User }) => response.user,
     }),
+
     getImages: builder.query<Image[], void>({
       query: () => "/uploads",
     }),
