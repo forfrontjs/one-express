@@ -1,21 +1,17 @@
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import styles from "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-// import { useAppDispatch } from "./store/hook";
-// import { setEmail, setPassword } from "./store/loginSlice";
-import { useLoginUserMutation } from "./store/loginSlice"; // Импортируем хук для логина
+import { useLoginUserMutation } from "./store/loginSlice";
 import iconDisabled from "./images/IconViewDisabled.png";
 import iconEnabled from "./images/visibility_16dp_686A67_FILL0_wght200_GRAD0_opsz24.png";
 
 const Login: FC = () => {
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputPassword, setInputPassword] = useState("");
+  const [inputEmail, setInputEmail] = useState<string>("");
+  const [inputPassword, setInputPassword] = useState<string>("");
   const [inputType, setInputType] = useState<"password" | "text">("password");
   const [message, setMessage] = useState<string>("");
 
-  // Используем хук для логина
   const [loginUser, { isLoading }] = useLoginUserMutation();
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,25 +29,28 @@ const Login: FC = () => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Отправляем данные для проверки
+    if (!inputEmail || !inputPassword) {
+      setMessage("Все поля должны быть заполнены!");
+      return;
+    }
+
     try {
       await loginUser({
         email: inputEmail,
         password: inputPassword,
       }).unwrap();
-      // Если логин успешен
+
       navigate("/");
-    } catch (error) {
-      // Если произошла ошибка
+
+      setInputEmail("");
+      setInputPassword("");
+    } catch (error: unknown) {
       if (error instanceof Error) {
-        setMessage(error.message);
+        setMessage(error.message || "Произошла ошибка при авторизации.");
       } else {
-        setMessage("An unknown error occurred.");
+        setMessage("Неверный email или пароль!");
       }
     }
-
-    setInputEmail("");
-    setInputPassword("");
   };
 
   return (
@@ -61,7 +60,7 @@ const Login: FC = () => {
         <form onSubmit={handleFormSubmit} className={styles.formAuthorization}>
           <label htmlFor="email" className={styles.formLabel}>
             <input
-              type="email"
+              type="text"
               id="email"
               className={styles.formInput}
               placeholder="Почта"
@@ -81,7 +80,7 @@ const Login: FC = () => {
             <img
               onClick={handlePasswordShow}
               className={styles.showPassword}
-              src={inputType === "password" ? iconDisabled : iconEnabled}
+              src={inputType === "password" ? iconEnabled : iconDisabled}
               alt="Скрыть/показать пароль"
             />
           </label>
@@ -89,7 +88,6 @@ const Login: FC = () => {
           <Link className={styles.formForgotPassword} to={"*"}>
             Забыли пароль?
           </Link>
-          <h4>{message}</h4>
           <button className={styles.loginButton} disabled={isLoading}>
             {isLoading ? "Загрузка..." : "ВОЙТИ"}
           </button>
