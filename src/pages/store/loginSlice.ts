@@ -27,9 +27,9 @@ export interface Image {
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_APP_API_URL, 
+    baseUrl: import.meta.env.VITE_API_APP_URL,
     prepareHeaders: (headers) => {
-      headers.set('Content-Type', 'application/json');
+      headers.set("Content-Type", "application/json");
       return headers;
     },
     // Обработка ошибок
@@ -44,17 +44,17 @@ export const apiSlice = createApi({
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], void>({
-      query: () => '/users',
+      query: () => "/users",
     }),
     loginUser: builder.mutation<LoginResponse, LoginPayload>({
       query: ({ email, password }) => ({
-        url: '/auth/login',
-        method: 'POST',
+        url: "/test/auth/login",
+        method: "POST",
         body: { email, password },
       }),
     }),
     getImages: builder.query<Image[], void>({
-      query: () => '/uploads',
+      query: () => "/uploads",
     }),
   }),
 });

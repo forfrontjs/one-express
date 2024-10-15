@@ -1,24 +1,34 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const adminSlice = createApi({
-  reducerPath: "admin",
+export const adminApi = createApi({
+  reducerPath: "adminApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_APP_URL, // Используем URL из env-файла
+    baseUrl: "http://192.168.68.137:5009",
+    credentials: "include",
     prepareHeaders: (headers) => {
-      headers.set("Content-Type", "multipart/form-data");
-      return headers; // Возвращаем заголовки после изменения
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwiaWQiOiJlYTgwNDU2Zi1hMzdjLTQyMzctODIyMC0wMDRkOTJmZTAzMjIiLCJpYXQiOjE3Mjg4OTU3ODl9.g9uBUqU4AVWLqAlXWOsrO6spTUsv2MCA8rOBhUqZtfg";
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
     },
   }),
   endpoints: (builder) => ({
-    // Пример эндпоинта для загрузки файла
     uploadFile: builder.mutation({
-      query: (file) => ({
-        url: "/uploads", // Путь к эндпоинту на бекенде
-        method: "POST",
-        body: file, // Отправляем файл в теле запроса
-      }),
+      query: (file: File) => {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        return {
+          url: "/uploads",
+          method: "POST",
+          body: formData,
+        };
+      },
     }),
   }),
 });
 
-export const { useUploadFileMutation } = adminSlice;
+
+export const { useUploadFileMutation } = adminApi;

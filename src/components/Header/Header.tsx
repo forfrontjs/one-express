@@ -10,6 +10,8 @@ export const Header: FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
+
+  
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -47,7 +49,7 @@ export const Header: FC<HeaderProps> = () => {
               </a>
             </li>
             <li className={styles.navItem}>
-              <a href="#Tracking" className={styles.link}>
+              <a href="#tracking" className={styles.link}>
                 Отслеживание
               </a>
             </li>
@@ -67,7 +69,7 @@ export const Header: FC<HeaderProps> = () => {
                 </li>
                 {loggedIn && (
                   <li className={styles.navItem}>
-                    <Link to="/logout" className={styles.link} onClick={toggleMenu}>
+                    <Link to="/" className={styles.link} onClick={toggleMenu}>
                       Выйти
                     </Link>
                   </li>
@@ -103,7 +105,11 @@ export const Header: FC<HeaderProps> = () => {
         </div>
 
         <div className={styles.login}>
-          <Link to="#Registration" className={styles.loginButton} onClick={handleLogin}>
+
+          {/* <button onClick={Regist} className={styles.loginButton}>
+            {loggedIn ? "Профиль" : "Вход"}
+          </button> */}
+          <Link  to="/registration" className={styles.loginButton} onClick={handleLogin}>
             {loggedIn ? "Профиль" : "Вход"}
           </Link>
         </div>

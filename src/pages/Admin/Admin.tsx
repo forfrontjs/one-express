@@ -2,32 +2,33 @@ import styles from './Admin.module.scss'
 import Photo from '../../assets/images/WhatsApp Image 2024-02-27 at 11.09 1.png'
 import Delete from '../../assets/images/DeleteLogo.png'
 import { useUploadFileMutation } from '../store/AdminSlice'
-import { useState } from 'react'
+// import { useState } from 'react'
 export const Admin = () => {
-  const [uploadImg, setUploadImg] = useState<File | null>(null);
-  const [uploadFile, { isLoading }] = useUploadFileMutation(); // Исправил вызов useUploadFileMutation
+  // const [uploadImg, setUploadImg] = useState<File | null>(null);
+  const [uploadFile] = useUploadFileMutation();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0]; // Берем файл напрямую из события
-
-      setUploadImg(file); // Сохраняем файл в состояние, если понадобится
+      const file = e.target.files[0];
 
       try {
-        // Отправляем файл напрямую, минуя состояние
-        await uploadFile({
-          file, // Передаем файл напрямую
-        });
-        console.log("Файл успешно загружен");
-      } catch (error) {
-        console.log("Ошибка при загрузке файла:", error);
+        console.log("Загружаем файл:", file);
+
+        const result = await uploadFile(file).unwrap();
+        console.log("Файл успешно загружен:", result);
+      } catch (err: any) {
+        console.error("Ошибка при загрузке:", err);
+        if (err.status === "FETCH_ERROR") {
+          console.error("Возможно, проблема с CORS или неверный URL.");
+        }
       }
     }
   };
+
   return (
-    <div className={`${styles.container} container`}>
+    <div  className={`${styles.container} container`}>
       <div className={styles.admin__box}>
         <h1>Панель администрации</h1>
         <div className={styles.admin__box__carousel}>
