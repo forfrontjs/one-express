@@ -2,6 +2,7 @@
   margin: 0 auto;
   padding: 0 15px;
   max-width: 1284px;
+  margin-bottom: 120px;
 }
 
 .container {
@@ -13,7 +14,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-left: 20px;
+  margin-left: 70px;
   margin-top: 70px;
 }
 
@@ -55,20 +56,23 @@
   display: flex;
   width: 95%;
   padding: 20px 0;
+  transition: transform 0.3s ease, opacity 0.3 ease;
+  overflow: hidden;
 }
 
 .swiper-slide {
-  flex: 0 0 30%;
-  max-width: 30%;
+  flex: 0 0 33%; 
+  max-width: 33%;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0.5;
-  transition: opacity 0.3s ease; 
-  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease, z-index 0.3s ease;
+
   &.swiper-slide-active {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1); 
+    z-index: 3; 
   }
 }
 
@@ -78,14 +82,20 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  
+  opacity: 0.5;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(0.8);
 
   img {
     width: 100%;
     height: auto;
     border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   }
-
+  &.active {
+    opacity: 1;
+    transform: scale(1);
+  }
   .cardContent {
     margin-top: 10px;
 
@@ -117,6 +127,17 @@
   }
 }
 
+.divider {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+
+  svg {
+    stroke: #686a67;
+  }
+}
+
 @media (max-width: 1024px) {
   .textFirst {
     font-size: 5vw;
@@ -141,19 +162,27 @@
 }
 
 @media (max-width: 768px) {
+  .section{
+    margin-bottom: 40px;
+
+  }
+  .title{
+    margin-left: 0;
+    padding-left: 15px;
+  }
   .textFirst {
     font-size: 6vw;
   }
 
   .textSecond {
     font-size: 4.5vw;
+   
   }
 
   .swiper-slide {
     flex: 0 0 100%;
     max-width: 100%;
   }
-
   .arrows {
     margin-top: 10px;
   }
@@ -165,18 +194,22 @@
   .cardContent p {
     font-size: 3.5vw;
   }
-  .line{
+
+  .line {
     display: none;
   }
 }
 
 @media (max-width: 480px) {
+  .section{
+    margin-bottom: 30px;
+  }
   .textFirst {
     font-size: 12vw;
   }
 
   .textSecond {
-    font-size: 8vw;
+    font-size: 9vw;
   }
 
   .swiper-slide {
@@ -194,7 +227,8 @@
   .arrows {
     gap: 10px;
   }
-  .line{
+
+  .line {
     display: none;
   }
 }
