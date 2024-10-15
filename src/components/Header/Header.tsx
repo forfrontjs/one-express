@@ -1,137 +1,104 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
+import { HashLink } from "react-router-hash-link";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.scss";
-import { Link } from "react-router-dom";
 import headerLink from "../../assets/images/LogoHeader.png";
-import telegram from "../../assets/images/tegramlogo.svg";
-import instagram from "../../assets/images/instalogo.svg";
-
-type HeaderProps = object;
+import instaLogo from '../../assets/images/instalogo.svg'
+import telegramLogo from '../../assets/images/tegramlogo.svg'
+interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = () => {
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const isAdminPage = location.pathname === '/admin';
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
+    setLoggedIn(!loggedIn);
   };
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [menuOpen]);
+  
+  const CloseMenu = () => {
+    setMenuOpen(false)
+  }
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} container`}>
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link to="/" className={styles.link}>
             <img src={headerLink} alt="Logo" />
           </Link>
         </div>
-        <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
-          <ul className={styles.navList}>
-            <li className={styles.navItem}>
-              <Link to="/login" className={styles.link} onClick={toggleMenu}>
-                Вход
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <a href="#" className={styles.link} onClick={toggleMenu}>
-                Главная
-              </a>
-            </li>
-            <li className={styles.navItem}>
-              <a href="#calculate" className={styles.link} onClick={toggleMenu}>
-                Калькулятор
-              </a>
-            </li>
-            <li className={styles.navItem}>
-              <a href="#tracking" className={styles.link} onClick={toggleMenu}>
-                Отслеживание
-              </a>
-            </li>
-            <li className={styles.navItem}>
-              <a href="#contacts" className={styles.link} onClick={toggleMenu}>
-                Контакты
-              </a>
-            </li>
-            {menuOpen && (
+
+        {!isAdminPage && (
+          <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
+            <ul className={styles.navList}>
               <li className={styles.navItem}>
-                <Link
-                  to="/profile"
-                  className={styles.link}
-                  onClick={toggleMenu}
-                >
-                  Личный профиль
-                </Link>
+                <HashLink smooth to="/#" className={styles.link} onClick={CloseMenu}>
+                  Главная
+                </HashLink>
               </li>
+              <li className={styles.navItem}>
+                <HashLink smooth to="/#Calculator" className={styles.link} onClick={CloseMenu}>
+                  Калькулятор
+                </HashLink>
+              </li>
+              <li className={styles.navItem}>
+                <HashLink smooth to="/#tracking" className={styles.link} onClick={CloseMenu}>
+                  Отслеживание
+                </HashLink>
+              </li>
+              <li className={styles.navItem}>
+                <HashLink smooth to="/#Contact" className={styles.link} onClick={CloseMenu}>
+                  Контакты
+                </HashLink>
+              </li>
+
+              {menuOpen && (
+                <>
+                  <li className={styles.navItem}>
+                    <Link to="/profile" className={styles.link} onClick={toggleMenu}>
+                      Личный профиль
+                    </Link>
+                  </li>
+                  {loggedIn && (
+                    <li className={styles.navItem}>
+                      <Link to="/" className={styles.link} onClick={toggleMenu}>
+                        Выйти
+                      </Link>
+                    </li>
+                  )}
+                </>
+              )}
+            </ul>
+
+            {menuOpen && (
+              <div className={styles.socialLinks}>
+                <a  className={styles.socialLinks} href="https://telegram.org" target="_blank" rel="noopener noreferrer">
+                <img src={instaLogo}/></a>
+                <a className={styles.socialLinks} href="https://instagram.org" target="_blank" rel="noopener noreferrer">
+                <img src={telegramLogo}/></a>
+              </div>
             )}
-          </ul>
-          {menuOpen && (
-            <div className={styles.socialMediaIcons}>
-              <a
-                href="https://telegram.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={telegram}
-                  alt="Telegram"
-                  className={styles.socialIcon}
-                />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={instagram}
-                  alt="Instagram"
-                  className={styles.socialIcon}
-                />
-              </a>
-            </div>
-          )}
-        </nav>
-        <div className={styles.login}>
-          {isLoggedIn ? (
-            <button className={styles.loginButton}>Профиль</button>
-          ) : (
-            <button className={styles.loginButton} onClick={handleLogin}>
-              <Link to="/login">Вход</Link>
-            </button>
-          )}
+          </nav>
+        )}
+
+        <div className={`${styles.burgerMenu} ${menuOpen ? styles.open : ""}`} onClick={toggleMenu}>
+          <div className={`${styles.burgerIcon} ${styles.burgerLeft}`}></div>
+          <div className={styles.burgerIcon}></div>
+          <div className={`${styles.burgerIcon} ${styles.burgerRight}`}></div>
         </div>
-        <div className={styles.burgerMenu} onClick={toggleMenu}>
-          {menuOpen ? (
-            <>
-              <div className={styles.burgerIconClose}></div>
-              <div className={styles.burgerIconClose}></div>
-            </>
-          ) : (
-            <>
-              <div
-                className={`${styles.burgerIcon} ${styles.leftburger}`}
-              ></div>
-              <div className={styles.burgerIcon}></div>
-              <div
-                className={`${styles.burgerIcon} ${styles.rightburger}`}
-              ></div>
-            </>
-          )}
+
+        <div className={styles.login}>
+          <Link to={isAdminPage ? '/login' : '/registration'} className={styles.loginButton} onClick={handleLogin}>
+            {isAdminPage ? "Войти" : (loggedIn ? "Профиль" : "Вход")}
+          </Link>
         </div>
       </div>
     </header>
   );
 };
-
-<div>{/* Header component */}</div>;
