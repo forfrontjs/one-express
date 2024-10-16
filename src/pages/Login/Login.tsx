@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import styles from "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "./store/loginSlice";
+import { useLoginUserMutation } from "../store/loginSlice";
 import iconDisabled from "./images/IconViewDisabled.png";
 import iconEnabled from "./images/visibility_16dp_686A67_FILL0_wght200_GRAD0_opsz24.png";
 
