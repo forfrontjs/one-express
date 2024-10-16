@@ -1,4 +1,7 @@
-
+.container{
+    // width: 1284px;
+    width: 100%;
+}
     .profileSection {
         width: 100%;
         display: flex;
@@ -31,6 +34,7 @@
             display: flex;
             justify-content: end;
             margin-top: 60px;
+            padding-right: 78px;
             gap: 100px;
 
             .ChangePassword {
@@ -96,28 +100,30 @@
                 background:  #f5d100;
             }
             .dropdownMenu {
-                
+                max-height: 200px; /* Ограничиваем высоту для показа 5 месяцев */
+                overflow-y: scroll; /* Добавляем вертикальный скролл */
                 list-style: none;
                 padding: 0;
-                margin-left: 650px;
-                transition: max-height 0.5s ease, opacity 0.5s ease;
-                margin-top: 525px;
+                margin-left: 0; /* Убираем фиксированные отступы */
+                margin-top: 10px; /* Регулируем отступ сверху */
                 position: absolute; 
                 background-color: white;
                 border: 1px solid #ccc;
-                width: 510px;
+                width: 100%;
+                max-width: 510px;
                 z-index: 10;
                 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-              
+                
                 li {
-                  padding: 10px;
-                  cursor: pointer;
-                  
-                  &:hover {
-                    background-color: #f0f0f0;
-                  }
+                    padding: 10px;
+                    cursor: pointer;
+            
+                    &:hover {
+                        background-color: #f0f0f0;
+                    }
                 }
-              }
+            }
+            
 
         }
         .MonthStatistics{
@@ -166,6 +172,7 @@
         width: 335px;
     }
     .profileSection{
+        
         .TitleSection{
             margin-top: 50px;
             .PersonalProfile{
@@ -177,6 +184,7 @@
             }
         }
         .Secret{
+            padding-right: 0;
             margin-top: 30px;
             gap: 30px;
             .ChangePassword{
@@ -187,9 +195,16 @@
                     font-size: 11px;
                 }
                 .ONEicon{
+                    
                     .ONE{
                         font-size: 12px;
-                    }             
+                        margin-right: 5px;
+                    }  
+                    .Icon{
+                        margin-top: 10px;
+                        width: 13px;
+                       
+                    }           
                 }
             }
         }
@@ -197,7 +212,7 @@
     .Statistics{
         margin-top: 60px;
         .StatisticsButton{
-            display: flex;
+            
             flex-direction: column;
             gap:10px;
             .YourStatistics{
@@ -207,21 +222,23 @@
                 text-transform: lowercase;
             }
             .changeMonth{
+                display: flex;
+                
                 font-weight: 400;
                 font-size: 15px;    
-                margin-left: -5px;
+                margin-right: 133px;
 
                 padding: 17px 67px;
                 width: 335px;
                 height: 40px;
-                position: absolute;
+               
             }
             .dropdownMenu{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 margin-left: 0px;
-                margin-top: 40px;
+                margin-top: 70px;
                 width: 335px;
 
                 
