@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 17px 78px;
+  // padding: 17px 78px;
+  width: 100%;
   height: 119px;
   border-bottom: 1px solid #ececec;
   box-shadow: 0 0 12px 0 rgba(193, 193, 193, 0.08);
@@ -21,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 1284px;
+    // max-width: 1284px;
     margin: 0 auto;
   }
 
@@ -181,6 +182,7 @@
     justify-content: center;
     gap: 20px;
     margin-top: 30px;
+
 
     a {
       img {

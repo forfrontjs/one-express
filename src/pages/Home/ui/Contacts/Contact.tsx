@@ -37,7 +37,7 @@ export const Contact: React.FC = () => {
 
 
   return (
-    <div className={`${style.container} container`}>
+    <div id="Contact" className={`${style.container} container`}>
     <div className={style.contact}>
         <div className={style.conta}>
             <p>Контакты</p>
