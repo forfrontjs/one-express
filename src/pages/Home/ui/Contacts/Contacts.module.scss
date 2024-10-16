@@ -54,6 +54,7 @@
     height: 290px;
     border-bottom: solid #ECECEC ;
     display: flex;
+    justify-content: space-between;
     
   }
 
@@ -120,7 +121,7 @@
   
   .den {
     margin-left: 30px;
-    width: 50%;
+    width: 47%;
 
     margin-top: 40px;
     margin-bottom: 20px;
@@ -151,6 +152,12 @@
       color: #686A67;
     }     
 
+  }
+
+  .line2 {
+    width: 1px;
+    height: 100%;
+    background: #ECECEC;
   }
 
 
@@ -186,6 +193,7 @@
 @media (max-width: 600px){
   .contact {
     padding-left: 20px;
+    padding-top: 100px;
     }
   .conta{
     p{
@@ -215,15 +223,29 @@
 
 
 @media (max-width: 480px){
+
+  .contact {
+    height: 673px;
+    padding-top: 0;
+    margin-top: 50px;
+    display: block;
+    }
+
+  .adres{
+
+    height: 435px;
+    margin-top: 70px;
+  }
+  
   .conta{
     height: 31px;
   }
-  .contact{  
-    display: block;
-  }
-  .adres{
-    display: block;
-  }
+  // .contact{  
+  //   display: block;
+  // }
+  // .adres{
+  //   display: block;
+  // }
   .phone { 
     width: 246px;
     height: 281px;
@@ -233,4 +255,10 @@
       width: 100%;
       p{ font-size: 14px;}}
             }
+
+  .biw{
+    .p4 {
+      padding-top: 50px;
+    }
+  }
 }

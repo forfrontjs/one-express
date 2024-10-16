@@ -1,3 +1,4 @@
+import React from "react"
 import style from "./Contacts.module.scss"
 import logo1 from "../../../../assets/images/contacts/Phone number 1.png"
 import logo2 from "../../../../assets/images/contacts/Phone number 2.png"
@@ -6,22 +7,22 @@ import  "../../../../assets/styles/_global.scss"
 
 
 
-export const Contact = () => {
+export const Contact: React.FC = () => {
 
-    function replaceParagraphTextByClass() {
-        const paragraphs = document.querySelectorAll('.voskr'); 
+    function replaceParagraphTextByClass(): void {
+        const paragraphs: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.voskr'); 
         paragraphs.forEach(p => {
             p.textContent = 'Воскр'; 
         });
 
-        const paragraphs2 = document.querySelectorAll('.poned'); 
+        const paragraphs2: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.poned'); 
         paragraphs2.forEach(p => {
             p.textContent = 'Пон - Субб'; 
         });
     }
     
    
-    function checkScreenSize() {
+    function checkScreenSize(): void {
         if (window.matchMedia('(max-width: 768px)').matches) {
           
             replaceParagraphTextByClass();

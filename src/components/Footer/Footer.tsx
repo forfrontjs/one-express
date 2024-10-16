@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import style from "./Footer.module.scss"
 import logo from "../../assets/images/footer/Logotype.png"
@@ -6,22 +7,29 @@ import inst from "../../assets/images/footer/Instagram (1).png"
 
 import "../../assets/styles/_global.scss"
 
-export const Footer = () => {
 
-  function removeParagraph() {
-    const paragraphs = document.querySelectorAll('nav'); 
-    paragraphs.forEach(nav => nav.remove()); 
-}
 
-function checkScreenSize() {
-  if (window.matchMedia('(max-width: 768px)').matches) {
-      removeParagraph();
+export const Footer: React.FC = () => {
+
+  function removeParagraph(): void {
+      const paragraphs: NodeListOf<HTMLElement> = document.querySelectorAll('nav'); 
+      paragraphs.forEach((nav: HTMLElement) => nav.remove());
   }
-}
 
-checkScreenSize();
+  function checkScreenSize(): void {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+          removeParagraph();
+      }
+  }
 
-window.addEventListener('resize', checkScreenSize);
+  useEffect(() => {
+      checkScreenSize(); 
+      window.addEventListener('resize', checkScreenSize); 
+
+      return () => {
+          window.removeEventListener('resize', checkScreenSize);
+      };
+  }, []);
 
 
   return (
