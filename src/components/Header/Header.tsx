@@ -1,189 +1,104 @@
-import { FC, useState, useEffect } from 'react';
-import style from './Tracking.module.scss';
+import { FC, useState } from "react";
+import { HashLink } from "react-router-hash-link";
+import { Link, useLocation } from "react-router-dom";
+import styles from "./Header.module.scss";
+import headerLink from "../../assets/images/LogoHeader.png";
+import instaLogo from '../../assets/images/instalogo.svg'
+import telegramLogo from '../../assets/images/tegramlogo.svg'
+interface HeaderProps {}
 
-interface TrackingData {
-  date: string;
-  status: string;
-}
+export const Header: FC<HeaderProps> = () => {
+  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-interface ParcelData {
-  personalCode: string;
-  trackingCode: string;
-  trackingHistory: TrackingData[];
-}
+  const isAdminPage = location.pathname === '/Admin';
 
-const mockData = (trackingCode: string): TrackingData[] => {
-  if (trackingCode === 'YT8966748804669') {
-    return [
-      { date: '2024-09-10', status: 'Поступил на склад' },
-      { date: '2024-09-15', status: 'В пути' },
-      { date: '2024-09-20', status: 'Прибыл в Бишкек' },
-    ];
-  } else if (trackingCode === 'JT526708666') {
-    return [
-      { date: '2024-09-01', status: 'Поступил на склад' },
-      { date: '2024-09-10', status: 'В пути' },
-      { date: '2024-09-20', status: 'Доставлено' },
-    ];
-  } else {
-    throw new Error('Трек-номер не найден');
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleLogin = () => {
+    setLoggedIn(!loggedIn);
+  };
+  
+  const CloseMenu = () => {
+    setMenuOpen(false)
   }
-};
-
-export const Tracking: FC = () => {
-  const [trackingCode, setTrackingCode] = useState('');
-  const [error, setError] = useState('');
-  const [parcelData, setParcelData] = useState<ParcelData | null>(null);
-  const [history, setHistory] = useState<string[]>([]);
-  const [showHistory, setShowHistory] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const savedHistory = localStorage.getItem('trackingHistory');
-    if (savedHistory) {
-      setHistory(JSON.parse(savedHistory));
-    }
-  }, []);
-
-  const saveToHistory = (code: string) => {
-    if (!history.includes(code)) {
-      const updatedHistory = [code, ...history];
-      setHistory(updatedHistory);
-      localStorage.setItem('trackingHistory', JSON.stringify(updatedHistory));
-    }
-  };
-
-  const handleTrack = () => {
-    if (trackingCode.length < 11) {
-      setError('Трек-код должен содержать не менее 11 символов');
-      return;
-    }
-    setError('');
-
-    try {
-      // Используем тестовые данные
-      const trackingHistory = mockData(trackingCode);
-
-      const mockedData: ParcelData = {
-        personalCode: 'ONE-1',
-        trackingCode: trackingCode,
-        trackingHistory,
-      };
-
-      setParcelData(mockedData);
-      saveToHistory(trackingCode);
-      setTrackingCode('');
-    } catch (error: any) {
-      setError(error.message);
-    }
-  };
-
-  const removeFromHistory = (code: string, event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation(); 
-    setIsDeleting(true);
-    const updatedHistory = history.filter((item) => item !== code);
-    setHistory(updatedHistory);
-    localStorage.setItem('trackingHistory', JSON.stringify(updatedHistory));
-
-    setTimeout(() => {
-      setIsDeleting(false);
-    }, 200);
-  };
-
-  const handleHistoryClick = (code: string, event: React.MouseEvent<HTMLLIElement>) => {
-    event.stopPropagation();
-    setTrackingCode(code);
-    setShowHistory(false);
-  };
-
   return (
-    <section className={style.wrapper} id='tracking'>
-      <div className={style.container}>
-        <div className={style.searchSection}>
-          <h2 className={style.title}>Отслеживание товара</h2>
-          <div className={style.lines}></div>
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <div className={styles.logo}>
+          <Link to="/" className={styles.link}>
+            <img src={headerLink} alt="Logo" />
+          </Link>
         </div>
-        <div className={style.trackingInfo}>
-          <input
-            className={style.searchInp}
-            type="text"
-            value={trackingCode}
-            placeholder={error || "Введите трек-код"}
-            onChange={(e) => {
-              setTrackingCode(e.target.value);
-              if (error) setError(''); // Сбрасываем ошибку при вводе
-            }}
-            onFocus={() => setShowHistory(true)}
-            onBlur={() => {
-              if (!isDeleting) setTimeout(() => setShowHistory(false), 200);
-            }}
-          />
-          <button onClick={handleTrack} className={style.searchButton}>
-            ОТСЛЕДИТЬ
-          </button>
 
-          {showHistory && history.length > 0 && (
-            <div className={style.history}>
-              <ul>
-                {history.map((code, index) => (
-                  <li key={index} className={style.historyItem} onClick={(e) => handleHistoryClick(code, e)}>
-                    {code}
-                    <button
-                      onMouseDown={(e) => removeFromHistory(code, e)}
-                      className={style.deleteButton}
-                    >
-                      ✕
-                    </button>
+        {!isAdminPage && (
+          <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
+            <ul className={styles.navList}>
+              <li className={styles.navItem}>
+                <HashLink smooth to="/#" className={styles.link} onClick={CloseMenu}>
+                  Главная
+                </HashLink>
+              </li>
+              <li className={styles.navItem}>
+                <HashLink smooth to="/#Calculator" className={styles.link} onClick={CloseMenu}>
+                  Калькулятор
+                </HashLink>
+              </li>
+              <li className={styles.navItem}>
+                <HashLink smooth to="/#tracking" className={styles.link} onClick={CloseMenu}>
+                  Отслеживание
+                </HashLink>
+              </li>
+              <li className={styles.navItem}>
+                <HashLink smooth to="/#Contact" className={styles.link} onClick={CloseMenu}>
+                  Контакты
+                </HashLink>
+              </li>
+
+              {menuOpen && (
+                <>
+                  <li className={styles.navItem}>
+                    <Link to="/profile" className={styles.link} onClick={toggleMenu}>
+                      Личный профиль
+                    </Link>
                   </li>
-                ))}
-              </ul>
-            </div>
-          )}
+                  {loggedIn && (
+                    <li className={styles.navItem}>
+                      <Link to="/" className={styles.link} onClick={toggleMenu}>
+                        Выйти
+                      </Link>
+                    </li>
+                  )}
+                </>
+              )}
+            </ul>
+
+            {menuOpen && (
+              <div className={styles.socialLinks}>
+                <a  className={styles.socialLinks} href="https://telegram.org" target="_blank" rel="noopener noreferrer">
+                <img src={instaLogo}/></a>
+                <a className={styles.socialLinks} href="https://instagram.org" target="_blank" rel="noopener noreferrer">
+                <img src={telegramLogo}/></a>
+              </div>
+            )}
+          </nav>
+        )}
+
+        <div className={`${styles.burgerMenu} ${menuOpen ? styles.open : ""}`} onClick={toggleMenu}>
+          <div className={`${styles.burgerIcon} ${styles.burgerLeft}`}></div>
+          <div className={styles.burgerIcon}></div>
+          <div className={`${styles.burgerIcon} ${styles.burgerRight}`}></div>
         </div>
 
-        {parcelData && (
-          <div className={style.result}>
-            <div className={style.trackingTable}>
-              <div className={style.trackingRow}>
-                <div className={style.trackingCellHeader}>Дата</div>
-                <div className={style.trackingCell}>
-                  {parcelData.trackingHistory.map((data, index) => (
-                    <div key={index}>{data.date}</div>
-                  ))}
-                </div>
-              </div>
-
-              <div className={style.trackingRow}>
-                <div className={style.trackingCellHeader}>Статус</div>
-                <div className={style.trackingCell}>
-                  {parcelData.trackingHistory.map((data, index) => (
-                    <div key={index} className={style.trackingStatusIndicator}>
-                      <div className={style.statusDot}></div>
-                      <div className={style.statusDescription}>{data.status}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className={style.trackingRow}>
-                <div className={style.trackingCellHeader}>Персональный код</div>
-                <div className={style.trackingCell}>
-                  <div>{parcelData.personalCode}</div>
-                </div>
-              </div>
-
-              <div className={style.trackingRow}>
-                <div className={style.trackingCellHeader}>Трек-код</div>
-                <div className={style.trackingCell}>
-                  <div>{parcelData.trackingCode}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        <div className={styles.login}>
+          <Link to={isAdminPage ? '/login' : '/registration'} className={styles.loginButton} onClick={handleLogin}>
+            {isAdminPage ? "Войти" : (loggedIn ? "Профиль" : "Вход")}
+          </Link>
+        </div>
       </div>
-    </section>
+    </header>
   );
 };
-
-export default Tracking;
