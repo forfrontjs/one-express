@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Profile.module.scss";
+import ProgressBar from "./ProgressBar/ProgressBar";
 console.log(styles);
 
 const Profile: React.FC = () => {
@@ -106,6 +107,7 @@ const Profile: React.FC = () => {
             <div className={styles.NumberSom}>0 сом</div>
           </div>
         </div>
+        <ProgressBar />
       </div>
     </div>
   );

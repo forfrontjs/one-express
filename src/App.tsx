@@ -4,11 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { Admin } from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
-
-// import { Profile } from "./pages/Profile";
+import Registration from "./pages/Registration/Registration";
 import Profile from "./pages/Profile/Profile";
 
-import Registration from "./pages/Registration/Registration";
 
 export const App = () => {
   return (
