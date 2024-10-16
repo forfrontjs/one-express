@@ -7,16 +7,10 @@
     justify-content: center;
   }
 
-  .container{
-    width: 90%;
-    height: 85px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+
   
   .inner {
-    width: 100%;
+    width: 90%;
     height: 85px;
     display: flex;
     justify-content: space-between;
@@ -34,8 +28,8 @@
     width: 60%;
     height: 22px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    gap: 60px;
   }
   
   .firstlogo {

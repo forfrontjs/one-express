@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import style from "./Footer.module.scss"
 import logo from "../../assets/images/footer/Logotype.png"
 import tele from "../../assets/images/footer/Telegram.png"
 import inst from "../../assets/images/footer/Instagram (1).png"
 
 import "../../assets/styles/_global.scss"
+import { Link } from 'react-router-dom';
 
 
 
@@ -33,16 +34,16 @@ export const Footer: React.FC = () => {
 
 
   return (
-        
-    <div className={style.footer} >
-        <div className={`${style.container} container`}>
+    
+    <div className={`${style.container} container`}>    
+        <div className={style.footer} >
         <div className={style.inner}>
-            <img className={style.firstlogo} src={logo} alt="" />
-            <nav className={style.contacts}>
-                <Link to="/home" className={style.links}>Главная</Link>
-                <Link to="/calc" className={style.links}>Калькулятор</Link>
-                <Link to="/navigate" className={style.links}>Отслеживание</Link>
-                <Link to="/contacts" className={style.links}>Контакты</Link>
+            <Link to="/"><img className={style.firstlogo} src={logo} alt="" /></Link>
+            <nav className={style.contacts}>        
+                 <HashLink smooth to="/#" className={style.links}>Главная</HashLink>
+                 <HashLink smooth to="/#Calculator" className={style.links}>Калькулятор</HashLink>
+                 <HashLink smooth to="/#tracking" className={style.links}>Отслеживание</HashLink>
+                 <HashLink smooth to="/#Contact" className={style.links}>Контакты</HashLink>
                 </nav>
             <div className={style.social}>
                 <a href="https://telegram.org"><img className={style.sociallogos} src={tele} alt="" /></a>
