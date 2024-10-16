@@ -32,10 +32,10 @@
     }
     
     
-  }
-  
-  
-  
+  }  
+    
+
+
   .adres {
     width: 100%;
     height: 516px;
@@ -48,8 +48,8 @@
   }
 
   
-  .time {
-  
+  .time {  
+
     width: 100%;
     height: 290px;
     border-bottom: solid #ECECEC ;
@@ -66,7 +66,11 @@
     justify-content: space-between;
 
     div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       width: 27%;
+      height: 80%;
   
       p {
         font-family: "Noto Sans";
@@ -83,7 +87,7 @@
   }
 
   .biw {
-    width: 50%;
+  width: 50%;
   height: 179px;
   padding-top: 40px;
   display: flex;
@@ -161,15 +165,10 @@
   }
 
 
-  
 
 
-@media (max-width: 1000px){
-  .phone {            
-          div{
-            p{ font-size: 16px;}}
-                  }  
-}
+
+
 
 @media (max-width: 768px){
   .conta{
@@ -177,20 +176,12 @@
       width: 40%;
     }
   }
-  .phone {            
-    div{
-      p{ font-size: 14px;}}
-            }
+
 }
 
-@media (max-width: 670px){
-  .phone {            
-    div{
-      p{ font-size: 12px;}}
-            }
-}
 
-@media (max-width: 600px){
+
+@media (max-width: 610px){
   .contact {
     padding-left: 20px;
     padding-top: 100px;
@@ -202,7 +193,7 @@
   }
   .phone {            
     div{
-      p{ font-size: 10px;}}
+      p{ font-size: 16px;}}
             }
   .biw {
   .p3 {
@@ -240,12 +231,7 @@
   .conta{
     height: 31px;
   }
-  // .contact{  
-  //   display: block;
-  // }
-  // .adres{
-  //   display: block;
-  // }
+
   .phone { 
     width: 246px;
     height: 281px;
