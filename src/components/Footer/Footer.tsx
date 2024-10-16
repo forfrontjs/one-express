@@ -8,22 +8,22 @@ import inst from "../../assets/images/footer/Instagram (1).png";
 import "../../assets/styles/_global.scss";
 
 export const Footer: React.FC = () => {
-    const location = useLocation(); // Получаем текущий путь
+    const location = useLocation(); 
 
-    // Удаляем элементы nav при определенной ширине экрана
+
     function removeParagraph(): void {
         const paragraphs: NodeListOf<HTMLElement> = document.querySelectorAll('nav'); 
         paragraphs.forEach((nav: HTMLElement) => nav.remove());
     }
 
-    // Проверка ширины экрана
+
     function checkScreenSize(): void {
         if (window.matchMedia('(max-width: 768px)').matches) {
             removeParagraph();
         }
     }
 
-    // Выполняем проверку при монтировании и отслеживаем изменение размера окна
+  
     useEffect(() => {
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
@@ -33,9 +33,8 @@ export const Footer: React.FC = () => {
         };
     }, []);
 
-    // Условно рендерим footer, исключая его на странице /admin
     if (location.pathname === "/admin") {
-        return null; // Не отображаем Footer на странице /admin
+        return null;
     }
 
     return (
