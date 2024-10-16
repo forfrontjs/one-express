@@ -7,6 +7,7 @@ import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import Profile from "./pages/Profile/Profile";
 
+
 export const App = () => {
   return (
     <>

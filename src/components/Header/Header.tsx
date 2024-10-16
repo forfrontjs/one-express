@@ -13,7 +13,7 @@ export const Header: FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const isAdminPage = location.pathname === '/Admin';
+  const isAdminPage = location.pathname === '/admin';
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -27,7 +27,7 @@ export const Header: FC<HeaderProps> = () => {
     setMenuOpen(false)
   }
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} container`}>
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link to="/" className={styles.link}>
