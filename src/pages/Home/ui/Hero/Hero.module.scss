@@ -2,12 +2,15 @@
   margin: 0 auto;
   padding: 0 15px;
   max-width: 1284px;
-  margin-bottom: 120px;
+  
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  max-width: 1280px;
+  
+
 }
 
 .title {
