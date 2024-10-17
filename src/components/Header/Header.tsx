@@ -3,8 +3,8 @@ import { HashLink } from "react-router-hash-link";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.scss";
 import headerLink from "../../assets/images/LogoHeader.png";
-import instaLogo from '../../assets/images/instalogo.svg'
-import telegramLogo from '../../assets/images/tegramlogo.svg'
+import instaLogo from '../../assets/images/instalogo.svg';
+import telegramLogo from '../../assets/images/tegramlogo.svg';
 
 interface HeaderProps {}
 
@@ -16,16 +16,17 @@ export const Header: FC<HeaderProps> = () => {
   const isAdminPage = location.pathname === '/admin';
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen((prev) => !prev); 
   };
 
   const handleLogin = () => {
-    setLoggedIn(!loggedIn);
+    setLoggedIn((prev) => !prev);
   };
-  
-  const CloseMenu = () => {
-    setMenuOpen(false)
-  }
+
+  const closeMenu = () => {
+    setMenuOpen(false); 
+  };
+
   return (
     <header className={`${styles.header} container`}>
       <div className={styles.container}>
@@ -36,25 +37,25 @@ export const Header: FC<HeaderProps> = () => {
         </div>
 
         {!isAdminPage && (
-          <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
-            <ul className={styles.navList}>
+          <nav className={`${styles.nav}`}>
+            <ul className={`${styles.navList} ${menuOpen ? styles.navOpen : ""}`}>
               <li className={styles.navItem}>
-                <HashLink smooth to="/#" className={styles.link} onClick={CloseMenu}>
+                <HashLink smooth to="/#" className={styles.link} onClick={closeMenu}>
                   Главная
                 </HashLink>
               </li>
               <li className={styles.navItem}>
-                <HashLink smooth to="/#Calculator" className={styles.link} onClick={CloseMenu}>
+                <HashLink smooth to="/#Calculator" className={styles.link} onClick={closeMenu}>
                   Калькулятор
                 </HashLink>
               </li>
               <li className={styles.navItem}>
-                <HashLink smooth to="/#tracking" className={styles.link} onClick={CloseMenu}>
+                <HashLink smooth to="/#tracking" className={styles.link} onClick={closeMenu}>
                   Отслеживание
                 </HashLink>
               </li>
               <li className={styles.navItem}>
-                <HashLink smooth to="/#Contact" className={styles.link} onClick={CloseMenu}>
+                <HashLink smooth to="/#Contact" className={styles.link} onClick={closeMenu}>
                   Контакты
                 </HashLink>
               </li>
@@ -62,13 +63,13 @@ export const Header: FC<HeaderProps> = () => {
               {menuOpen && (
                 <>
                   <li className={styles.navItem}>
-                    <Link to="/profile" className={styles.link} onClick={toggleMenu}>
+                    <Link to="/profile" className={styles.link} onClick={closeMenu}>
                       Личный профиль
                     </Link>
                   </li>
                   {loggedIn && (
                     <li className={styles.navItem}>
-                      <Link to="/" className={styles.link} onClick={toggleMenu}>
+                      <Link to="/" className={styles.link} onClick={closeMenu}>
                         Выйти
                       </Link>
                     </li>
@@ -77,12 +78,14 @@ export const Header: FC<HeaderProps> = () => {
               )}
             </ul>
 
-            {menuOpen && (
+            {menuOpen && ( 
               <div className={styles.socialLinks}>
-                <a  className={styles.socialLinks} href="https://telegram.org" target="_blank" rel="noopener noreferrer">
-                <img src={instaLogo}/></a>
-                <a className={styles.socialLinks} href="https://instagram.org" target="_blank" rel="noopener noreferrer">
-                <img src={telegramLogo}/></a>
+                <a href="https://telegram.org" target="_blank" rel="noopener noreferrer">
+                  <img src={telegramLogo} alt="Telegram" />
+                </a>
+                <a href="https://instagram.org" target="_blank" rel="noopener noreferrer">
+                  <img src={instaLogo} alt="Instagram" />
+                </a>
               </div>
             )}
           </nav>
