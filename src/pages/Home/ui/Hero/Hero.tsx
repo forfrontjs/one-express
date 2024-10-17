@@ -5,16 +5,15 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Swiper as SwiperCore } from 'swiper';
-import { useGetImagesQuery } from '../../../Login/store/loginSlice'; 
-
+import { useGetImagesQuery } from '../../../store/loginSlice';
 import title1 from '../../../../assets/images/titleImage2.png';
 import title2 from '../../../../assets/images/titleImage2.png';
 import title3 from '../../../../assets/images/titleImage2.png';
 import title4 from '../../../../assets/images/titleImage2.png'; 
 
 interface Image {
-  id: number; 
-  url: string; 
+  id: number;
+  url: string;
 }
 
 export const Hero = () => {
@@ -44,7 +43,9 @@ export const Hero = () => {
         <div className={styles.title}>
           <h2 className={styles.textFirst}>ONE EXPRESS</h2>
           <div className={styles.line}></div>
-          <p className={styles.textSecond}>Быстрая и надежная доставка товаров с Китая</p>
+          <p className={styles.textSecond}>
+            Быстрая и надежная доставка товаров с Китая
+          </p>
         </div>
 
         <div className={styles.wrapper}>
@@ -95,7 +96,11 @@ export const Hero = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M20 15H5M5 15L15 25M5 15L15 5" stroke="#686A67" strokeWidth="2" />
+              <path
+                d="M20 15H5M5 15L15 25M5 15L15 5"
+                stroke="#686A67"
+                strokeWidth="2"
+              />
             </svg>
             <svg
               onClick={() => swiperRef.current?.slideNext()}
@@ -105,16 +110,42 @@ export const Hero = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M10 15H25M25 15L15 5M25 15L15 25" stroke="#686A67" strokeWidth="2" />
+              <path
+                d="M10 15H25M25 15L15 5M25 15L15 25"
+                stroke="#686A67"
+                strokeWidth="2"
+              />
             </svg>
           </div>
 
           <div className={styles.divider}>
-            <svg width="50" height="2" viewBox="0 0 50 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 1L50 0.999999" stroke="#686A67" strokeWidth="2" strokeLinejoin="round" />
+            <svg
+              width="50"
+              height="2"
+              viewBox="0 0 50 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 1L50 0.999999"
+                stroke="#686A67"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
             </svg>
-            <svg width="50" height="2" viewBox="0 0 50 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M50 1L0 0.999999" stroke="#686A67" strokeWidth="2" strokeLinejoin="round" />
+            <svg
+              width="50"
+              height="2"
+              viewBox="0 0 50 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M50 1L0 0.999999"
+                stroke="#686A67"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
             </svg>
           </div>
         </div>

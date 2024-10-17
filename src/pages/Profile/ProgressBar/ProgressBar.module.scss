@@ -1,0 +1,122 @@
+.progressBarContainer {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 15vh;
+  font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #ffffff;
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+    font-weight: normal;
+  }
+}
+
+.textContainer {
+  display: flex;
+  justify-content: space-around;
+  text-align: left;
+  flex-direction: column;
+}
+
+.progress {
+  background-color: #333;
+  border-radius: 10px;
+  height: 2rem;
+  margin: 2rem 0;
+  position: relative;
+  width: 100%;
+}
+
+.progressFill {
+  background-color: #ffcc00;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.progressLabel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #000000;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+.levels {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+
+  p {
+    color: #ffffff;
+
+    @media (max-width: 480px) {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+.level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5rem;
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
+}
+
+.levelIcon {
+  width: 15rem;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.levelInfo {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #ffffff;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+.resetInfo {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #aaa;
+
+  @media (max-width: 480px) {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    order: 1;
+  }
+}

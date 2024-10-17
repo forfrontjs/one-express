@@ -1,0 +1,279 @@
+.container{
+    // width: 1284px;
+    width: 100%;
+}
+    .profileSection {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        .TitleSection{
+            display: flex;
+            margin-top: 100px;
+            align-items: center;            
+
+            .PersonalProfile {
+                font-family: 'Noto Sans', sans-serif;
+                font-weight: 600;
+                font-size: 32px;
+                color: #282b26;
+                
+            }
+            
+            .Line7 {
+                margin-left: 100px;
+                border: 1px solid;
+                width: 766px;
+                height: 1px;
+                color: #ececec;
+            }
+        }
+        
+        .Secret {
+            display: flex;
+            justify-content: end;
+            margin-top: 60px;
+            padding-right: 78px;
+            gap: 100px;
+
+            .ChangePassword {
+                font-family: 'Noto Sans', sans-serif,Arial, Helvetica;
+                font-weight: 500;
+                font-size: 23px;
+                text-transform: lowercase;
+                color:  #686a67;
+            }
+
+           
+            .PersonalCode {
+                font-family: 'Noto Sans', sans-serif,Arial, Helvetica;               
+                font-size: 23px;
+                text-transform: lowercase;
+                color: #686a67;
+            }
+            .ONEicon{
+                display: flex;
+                justify-content: flex-end;
+
+            }
+            .ONE {
+                display: flex;
+                padding-top: 15px;
+                font-family: 'Noto Sans', sans-serif,Arial, Helvetica;            
+                font-size: 26px;
+                color: #282b26;
+            }
+        }
+    }
+
+    .Statistics{
+        width: 100%;
+        margin-top: 120px;
+        .StatisticsButton{
+            display: flex;
+            align-items: center;
+            .YourStatistics{
+                font-family: 'Noto Sans', sans-serif,Arial, Helvetica;
+                font-weight: 500;
+                font-size: 28px;
+                color: #282b26;
+            }
+            .changeMonth{
+                position: relative; // Чтобы выпадающий список позиционировался относительно кнопки
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 133px;
+                font-family: 'Noto Sans', sans-serif,Arial, Helvetica;
+                font-weight: 500;
+                font-size: 28px;
+                text-transform: lowercase;
+                color: #626262;
+                border: 0;
+
+
+                padding: 17px 67px;
+                width: 510px;
+                height: 70px;
+                background:  #f5d100;
+            }
+            .dropdownMenu {
+                max-height: 200px; /* Ограничиваем высоту для показа 5 месяцев */
+                overflow-y: scroll; /* Добавляем вертикальный скролл */
+                list-style: none;
+                padding: 0;
+                margin-left: 0; /* Убираем фиксированные отступы */
+                margin-top: 10px; /* Регулируем отступ сверху */
+                position: absolute; 
+                background-color: white;
+                border: 1px solid #ccc;
+                width: 100%;
+                max-width: 510px;
+                z-index: 10;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                
+                li {
+                    padding: 10px;
+                    cursor: pointer;
+            
+                    &:hover {
+                        background-color: #f0f0f0;
+                    }
+                }
+            }
+            
+
+        }
+        .MonthStatistics{
+            display: flex;
+            margin-top: 120px;
+            .NumberOrders{
+                border: 1px solid #ececec;
+                padding: 20px;
+                width: 321px;
+                height: 250px;
+                .Orders{
+                    font-family: 'Noto Sans', sans-serif,Arial, Helvetica;
+                    font-weight: 400;
+                    font-size: 20px;
+                    text-transform: lowercase;
+                    color:#686a67;
+                }
+                .Number{
+                    height: 200px;
+                    display: flex;
+                    align-items: end;
+                    font-family: 'Noto Sans', sans-serif,Arial, Helvetica;
+                    font-weight: 600;
+                    font-size: 40px;
+                    line-height: 120%;
+                    letter-spacing: 0.03em;
+                    color:#282b26;
+                }
+                .NumberSom{
+                    height: 200px;
+                    display: flex;
+                    align-items: end;
+                    font-family: 'Noto Sans', sans-serif,Arial, Helvetica;
+                    font-weight: 600;
+                    font-size: 40px;
+                    line-height: 120%;
+                    letter-spacing: 0.03em;
+                    color:#f5d100;
+                }
+            }
+        }
+    }
+
+@media(min-width: 375px) and (max-width: 767px){
+    .container{
+        width: 335px;
+    }
+    .profileSection{
+        
+        .TitleSection{
+            margin-top: 50px;
+            .PersonalProfile{
+                font-size: 25px;
+            }
+            .Line7{
+                width: 69px;
+                margin-left: 30px;
+            }
+        }
+        .Secret{
+            padding-right: 0;
+            margin-top: 30px;
+            gap: 30px;
+            .ChangePassword{
+                font-size: 11px;
+            }
+            .PersonalCodeInfo{
+                .PersonalCode{
+                    font-size: 11px;
+                }
+                .ONEicon{
+                    
+                    .ONE{
+                        font-size: 12px;
+                        margin-right: 5px;
+                    }  
+                    .Icon{
+                        margin-top: 10px;
+                        width: 13px;
+                       
+                    }           
+                }
+            }
+        }
+    }
+    .Statistics{
+        margin-top: 60px;
+        .StatisticsButton{
+            
+            flex-direction: column;
+            gap:10px;
+            .YourStatistics{
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 100%;
+                text-transform: lowercase;
+            }
+            .changeMonth{
+                display: flex;
+                
+                font-weight: 400;
+                font-size: 15px;    
+                margin-right: 133px;
+
+                padding: 17px 67px;
+                width: 335px;
+                height: 40px;
+               
+            }
+            .dropdownMenu{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-left: 0px;
+                margin-top: 70px;
+                width: 335px;
+
+                
+                
+            }
+        }
+        .MonthStatistics{
+            margin-top: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            .NumberOrders{
+                width: 166px;
+                height: 103px;
+                .Orders{
+                    font-weight: 400;
+                    font-size: 12px;
+                }
+                .Number{
+                    display: flex;
+                    align-items: start;
+                    font-weight: 500;   
+                    font-size: 28px;
+                    margin-top: 23px;
+
+                }
+                .NumberSom{
+                    display: flex;
+                    align-items: start;
+                    font-weight: 500;   
+                    font-size: 28px;
+                    margin-top: 23px;
+                }
+            }
+           
+        }
+    }
+    
+}
