@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import style from './Tracking.module.scss';
+import style from './Tracking.module.scss'
 
 interface TrackingData {
   date: string;
@@ -12,15 +12,23 @@ interface ParcelData {
   trackingHistory: TrackingData[];
 }
 
-// Функция для получения случайной даты
-const getRandomDate = (start: Date, end: Date) => {
-  const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  return date.toISOString().split('T')[0]; // Формат YYYY-MM-DD
-};
-
-const getRandomStatus = () => {
-  const statuses = ['in_storage', 'on_the_way', 'delivered'];
-  return statuses[Math.floor(Math.random() * statuses.length)];
+// Тестовые данные для трек-номеров
+const mockData = (trackingCode: string): TrackingData[] => {
+  if (trackingCode === 'YT8966748804669') {
+    return [
+      { date: '2024-09-10', status: 'Поступил на склад' },
+      { date: '2024-09-15', status: 'В пути' },
+      { date: '2024-09-20', status: 'Прибыл в Бишкек' },
+    ];
+  } else if (trackingCode === 'JT526708666') {
+    return [
+      { date: '2024-09-01', status: 'Поступил на склад' },
+      { date: '2024-09-10', status: 'В пути' },
+      { date: '2024-09-20', status: 'Доставлено' },
+    ];
+  } else {
+    throw new Error('Трек-номер не найден');
+  }
 };
 
 export const Tracking: FC = () => {
@@ -47,29 +55,28 @@ export const Tracking: FC = () => {
   };
 
   const handleTrack = () => {
-    if (trackingCode.length < 11) {
-      setError('Трек-код должен содержать не менее 11 символов');
+    if (trackingCode.length < 9) {
+      setError('Трек-код должен содержать не менее 9 символов');
       return;
     }
     setError('');
 
-    const status = getRandomStatus();
+    try {
+      // Используем тестовые данные
+      const trackingHistory = mockData(trackingCode);
 
-    const trackingHistory: TrackingData[] = [
-      { date: getRandomDate(new Date(2024, 5, 1), new Date(2024, 6, 1)), status: 'Поступил на склад' },
-      { date: getRandomDate(new Date(2024, 6, 1), new Date(2024, 6, 30)), status: 'В пути' },
-      { date: getRandomDate(new Date(2024, 6, 30), new Date()), status: status === 'delivered' ? 'Прибыл в Бишкек' : 'На складе' },
-    ];
+      const mockedData: ParcelData = {
+        personalCode: 'ONE-1',
+        trackingCode: trackingCode,
+        trackingHistory,
+      };
 
-    const mockedData: ParcelData = {
-      personalCode: 'ONE-1',
-      trackingCode: trackingCode,
-      trackingHistory,
-    };
-
-    setParcelData(mockedData);
-    saveToHistory(trackingCode);
-    setTrackingCode('');
+      setParcelData(mockedData);
+      saveToHistory(trackingCode);
+      setTrackingCode('');
+    } catch (error: any) {
+      setError(error.message);
+    }
   };
 
   const removeFromHistory = (code: string, event: React.MouseEvent<HTMLButtonElement>) => {
@@ -85,7 +92,7 @@ export const Tracking: FC = () => {
   };
 
   const handleHistoryClick = (code: string, event: React.MouseEvent<HTMLLIElement>) => {
-    event.stopPropagation(); // Остановить всплытие события
+    event.stopPropagation();
     setTrackingCode(code);
     setShowHistory(false);
   };
@@ -142,7 +149,7 @@ export const Tracking: FC = () => {
                 <div className={style.trackingCellHeader}>Дата</div>
                 <div className={style.trackingCell}>
                   {parcelData.trackingHistory.map((data, index) => (
-                    <div key={index}>{new Date(data.date).toLocaleDateString('ru-RU')}</div>
+                    <div key={index}>{data.date}</div>
                   ))}
                 </div>
               </div>
