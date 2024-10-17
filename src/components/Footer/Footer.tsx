@@ -38,8 +38,8 @@ export const Footer: React.FC = () => {
     }
 
     return (
-        <div className={`${style.container} container`}>    
-            <div className={style.footer}>
+        <div className={style.footer}>    
+            <div className={`${style.container} container`}>
                 <div className={style.inner}>
                     <Link to="/"><img className={style.firstlogo} src={logo} alt="Логотип" /></Link>
                     <nav className={style.contacts}>        
