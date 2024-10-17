@@ -49,7 +49,7 @@
   transition: border-color 0.3s;
 
   &::placeholder {
-    color: rgb(255, 0, 0);
+    color: gray;
   }
 
   &:focus {
@@ -177,6 +177,12 @@
   }
 }
 
+
+// .trackingRow:nth-child(3),
+// .trackingRow:nth-child(4) {
+//   margin-left: 100px;
+// }
+
 .trackingStatusIndicator {
   display: flex;
   align-items: center;
@@ -187,7 +193,7 @@
     height: 13px;
     background-color: #f0c300;
     border-radius: 50%;
-    margin-left: -40px;
+    margin-left: -50px;
     margin-top: 10px;
   }
 
@@ -197,13 +203,17 @@
   }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 768px) {
   .container {
     padding: 10px;
+    max-width: 468px;
   }
 
   .title {
     font-size: 32px;
+  }
+  .lines {
+    max-width: 130px;
   }
   .trackingStatusIndicator {
   
@@ -238,14 +248,17 @@
   }
 
   .history {
-    max-width: 400px;
+    margin-left: -22px;
+    max-width: 220px;
   }
 
   .trackingTable {
+    max-width: 400px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     row-gap: 50px;
+
   }
 
   .trackingRow {
@@ -271,7 +284,9 @@
     order: 3;
   }
 
-  .trackingRow:nth-child(1),
+  .trackingRow:nth-child(1) {
+    width: 32%;
+  }
   .trackingRow:nth-child(2) {
     width: 48%;
   }

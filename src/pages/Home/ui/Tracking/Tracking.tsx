@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import style from './Tracking.module.scss';
+import style from './Tracking.module.scss'
 
 interface TrackingData {
   date: string;
@@ -55,8 +55,8 @@ export const Tracking: FC = () => {
   };
 
   const handleTrack = () => {
-    if (trackingCode.length < 9) {
-      setError('Трек-код должен содержать не менее 9 символов');
+    if (trackingCode.length < 11) {
+      setError('Трек-код должен содержать не менее 11 символов');
       return;
     }
     setError('');
