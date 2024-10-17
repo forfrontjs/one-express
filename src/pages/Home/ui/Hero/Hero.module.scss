@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   max-width: 1280px;
-  
+  margin: 0 auto;
 
 }
 
@@ -32,7 +32,7 @@
 }
 
 .textFirst {
-  font-family: "Rokkitt", serif;
+  font-family: "Rokkitt", sans-serif;
   font-weight: 700;
   font-size: 4vw;
   line-height: 1.2;
@@ -43,7 +43,7 @@
 }
 
 .textSecond {
-  font-family: "Noto-Sans", sans-serif;
+  font-family: "Noto-Sans" sans-serif;
   font-weight: 500;
   font-size: 3vw;
   line-height: 1.2;
@@ -90,7 +90,8 @@
   transform: scale(0.8);
 
   img {
-    width: 100%;
+    width: 460px;
+    height: 460px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);

@@ -11,6 +11,9 @@ import title2 from '../../../../assets/images/titleImage2.png';
 import title3 from '../../../../assets/images/titleImage2.png';
 import title4 from '../../../../assets/images/titleImage2.png'; 
 
+console.log(import.meta.env.VITE_APP_URL);
+
+
 interface Image {
   id: number;
   url: string;
@@ -79,9 +82,9 @@ export const Hero = () => {
             {finalImages.map((slide: Image, index: number) => (
               <SwiperSlide key={slide.id}>
                 <div
-                  className={`${styles.card} ${index === activeIndex ? styles.active : ''}`} // Добавляем класс для активного слайда
+                  className={`${styles.card} ${index === activeIndex ? styles.active : ''}`}
                 >
-                  <img src={slide.url} alt={`Slide ${slide.id}`} />
+                  <img src={`${import.meta.env.VITE_APP_URL}/uploads/${slide.id}/download`} alt={`Slide ${slide.id}`} />
                 </div>
               </SwiperSlide>
             ))}
