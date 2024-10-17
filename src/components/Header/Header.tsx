@@ -5,6 +5,7 @@ import styles from "./Header.module.scss";
 import headerLink from "../../assets/images/LogoHeader.png";
 import instaLogo from '../../assets/images/instalogo.svg'
 import telegramLogo from '../../assets/images/tegramlogo.svg'
+
 interface HeaderProps {}
 
 export const Header: FC<HeaderProps> = () => {
