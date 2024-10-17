@@ -39,6 +39,7 @@
 
 .searchInp {
   font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  font-weight: 400;
   width: 480px;
   height: 80px;
   padding: 10px 15px;
@@ -49,7 +50,7 @@
   transition: border-color 0.3s;
 
   &::placeholder {
-    color: gray;
+    color: rgb(255, 0, 0);
   }
 
   &:focus {
@@ -93,6 +94,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  
 }
 
 .historyItem {
@@ -129,6 +131,7 @@
   background-color: #fff;
   padding: 20px;
   margin-top: 40px;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;  
 }
 
 .trackingTable {
@@ -142,6 +145,8 @@
   justify-content: space-between;
   padding: 10px 0;
   flex-direction: column;
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+
 
   &:last-child {
     border-bottom: none;
@@ -159,6 +164,7 @@
 
 .trackingCell {
   font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
   row-gap: 30px;
@@ -177,12 +183,6 @@
   }
 }
 
-
-// .trackingRow:nth-child(3),
-// .trackingRow:nth-child(4) {
-//   margin-left: 100px;
-// }
-
 .trackingStatusIndicator {
   display: flex;
   align-items: center;
@@ -193,27 +193,24 @@
     height: 13px;
     background-color: #f0c300;
     border-radius: 50%;
-    margin-left: -50px;
+    margin-left: -40px;
     margin-top: 10px;
   }
 
   .statusDescription {
+    font-weight: 600;
     color: #333;
     font-size: 15px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 780px) {
   .container {
     padding: 10px;
-    max-width: 468px;
   }
 
   .title {
     font-size: 32px;
-  }
-  .lines {
-    max-width: 130px;
   }
   .trackingStatusIndicator {
   
@@ -248,17 +245,14 @@
   }
 
   .history {
-    margin-left: -22px;
-    max-width: 220px;
+    max-width: 400px;
   }
 
   .trackingTable {
-    max-width: 400px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     row-gap: 50px;
-
   }
 
   .trackingRow {
@@ -284,9 +278,7 @@
     order: 3;
   }
 
-  .trackingRow:nth-child(1) {
-    width: 32%;
-  }
+  .trackingRow:nth-child(1),
   .trackingRow:nth-child(2) {
     width: 48%;
   }
