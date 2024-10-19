@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./Profile.module.scss";
-console.log(styles);
 
 const Profile: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
