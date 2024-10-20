@@ -1,7 +1,10 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./Header.module.scss";
+import { FC, useState } from "react";
+import { HashLink } from "react-router-hash-link";
 import { Link, useLocation } from "react-router-dom";
+import styles from "./Header.module.scss";
 import headerLink from "../../assets/images/LogoHeader.png";
+import instaLogo from '../../assets/images/instalogo.svg';
+import telegramLogo from '../../assets/images/tegramlogo.svg';
 
 interface HeaderProps {}
 
@@ -10,25 +13,22 @@ export const Header: FC<HeaderProps> = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const isAdminPage = location.pathname === '/Admin';
+  const isAdminPage = location.pathname === '/admin';
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen((prev) => !prev); 
   };
 
   const handleLogin = () => {
-    setLoggedIn(!loggedIn);
+    setLoggedIn((prev) => !prev);
   };
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [menuOpen]);
+  const closeMenu = () => {
+    setMenuOpen(false); 
+  };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} container`}>
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link to="/" className={styles.link}>
@@ -37,39 +37,39 @@ export const Header: FC<HeaderProps> = () => {
         </div>
 
         {!isAdminPage && (
-          <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
-            <ul className={styles.navList}>
+          <nav className={`${styles.nav}`}>
+            <ul className={`${styles.navList} ${menuOpen ? styles.navOpen : ""}`}>
               <li className={styles.navItem}>
-                <a href="#" className={styles.link}>
+                <HashLink smooth to="/#" className={styles.link} onClick={closeMenu}>
                   Главная
-                </a>
+                </HashLink>
               </li>
               <li className={styles.navItem}>
-                <a href="#Calculator" className={styles.link}>
+                <HashLink smooth to="/#Calculator" className={styles.link} onClick={closeMenu}>
                   Калькулятор
-                </a>
+                </HashLink>
               </li>
               <li className={styles.navItem}>
-                <a href="#tracking" className={styles.link}>
+                <HashLink smooth to="/#tracking" className={styles.link} onClick={closeMenu}>
                   Отслеживание
-                </a>
+                </HashLink>
               </li>
               <li className={styles.navItem}>
-                <a href="#Contacts" className={styles.link}>
+                <HashLink smooth to="/#Contact" className={styles.link} onClick={closeMenu}>
                   Контакты
-                </a>
+                </HashLink>
               </li>
-              
+
               {menuOpen && (
                 <>
                   <li className={styles.navItem}>
-                    <Link to="/profile" className={styles.link} onClick={toggleMenu}>
+                    <Link to="/profile" className={styles.link} onClick={closeMenu}>
                       Личный профиль
                     </Link>
                   </li>
                   {loggedIn && (
                     <li className={styles.navItem}>
-                      <Link to="/" className={styles.link} onClick={toggleMenu}>
+                      <Link to="/" className={styles.link} onClick={closeMenu}>
                         Выйти
                       </Link>
                     </li>
@@ -78,11 +78,13 @@ export const Header: FC<HeaderProps> = () => {
               )}
             </ul>
 
-            {menuOpen && (
+            {menuOpen && ( 
               <div className={styles.socialLinks}>
                 <a href="https://telegram.org" target="_blank" rel="noopener noreferrer">
+                  <img src={telegramLogo} alt="Telegram" />
                 </a>
-                <a href="https://vk.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://instagram.org" target="_blank" rel="noopener noreferrer">
+                  <img src={instaLogo} alt="Instagram" />
                 </a>
               </div>
             )}

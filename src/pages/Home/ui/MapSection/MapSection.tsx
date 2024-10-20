@@ -50,6 +50,7 @@ const MapSection: React.FC = () => {
 
   return (
     <MapContainer
+    id="MapSection"
       center={position}
       zoom={20}
       className={styles.mapContainer}
