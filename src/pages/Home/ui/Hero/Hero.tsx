@@ -82,7 +82,12 @@ export const Hero = () => {
                     index === activeIndex ? styles.active : ""
                   }`} // Добавляем класс для активного слайда
                 >
-                  <img src={slide.url} alt={`Slide ${slide.id}`} />
+                  <img
+                    src={`${import.meta.env.VITE_APP_URL}/uploads/${
+                      slide.id
+                    }/download`}
+                    alt={`Slide ${slide.id}`}
+                  />
                 </div>
               </SwiperSlide>
             ))}
