@@ -1,3 +1,4 @@
+import React from "react"
 import style from "./Contacts.module.scss"
 import logo1 from "../../../../assets/images/contacts/Phone number 1.png"
 import logo2 from "../../../../assets/images/contacts/Phone number 2.png"
@@ -6,7 +7,35 @@ import  "../../../../assets/styles/_global.scss"
 
 
 
-export const Contact = () => {
+export const Contact: React.FC = () => {
+
+    function replaceParagraphTextByClass(): void {
+        const paragraphs: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.voskr'); 
+        paragraphs.forEach(p => {
+            p.textContent = 'Воскр'; 
+        });
+
+        const paragraphs2: NodeListOf<HTMLParagraphElement> = document.querySelectorAll('.poned'); 
+        paragraphs2.forEach(p => {
+            p.textContent = 'Пон - Субб'; 
+        });
+    }
+    
+   
+    function checkScreenSize(): void {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          
+            replaceParagraphTextByClass();
+        }
+    }
+    
+    checkScreenSize();
+
+    window.addEventListener('resize', checkScreenSize);
+
+
+
+
   return (
     <div id="Contact" className={`${style.container} container`}>
     <div className={style.contact}>
@@ -25,10 +54,10 @@ export const Contact = () => {
                 <div className={style.line2}></div>
                 <div className={style.den}>
                     <div >
-                        <p className={style.p1}>Понедельник - Суббота</p>
+                        <p className={`${style.p1} poned`}>Понедельник - Суббота</p>
                         <p className={style.p2}>10:00 - 18:00</p></div>
                     <div>
-                        <p className={style.p1}>Воскресенье</p>
+                        <p className={`${style.p1} voskr`}>Воскресенье</p>
                         <p className={style.p2}>Выходной</p>
                     </div>
                 </div>

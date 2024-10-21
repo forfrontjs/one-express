@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import iconDisabled from "../Login/images/IconViewDisabled.png";
 import iconEnabled from "../Login/images/visibility_16dp_686A67_FILL0_wght200_GRAD0_opsz24.png";
 import { useRegisterUserMutation } from "../store/loginSlice";
-
 const Registration: FC = () => {
   const [inputFullname, setInputFullname] = useState<string>("");
   const [inputAddress, setInputAddress] = useState<string>("");

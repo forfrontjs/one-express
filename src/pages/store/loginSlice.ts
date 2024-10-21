@@ -30,16 +30,9 @@ export interface Image {
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_APP_URL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("accessToken");
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_URL }),
+
   endpoints: (builder) => ({
     loginUser: builder.mutation<LoginResponse, LoginRequest>({
       query: ({ email, password }) => ({
