@@ -1,18 +1,16 @@
-import { useState, useRef } from 'react';
-import styles from './Hero.module.scss';
-import { SwiperSlide, Swiper } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Swiper as SwiperCore } from 'swiper';
-import { useGetImagesQuery } from '../../../store/loginSlice';
-import title1 from '../../../../assets/images/titleImage2.png';
-import title2 from '../../../../assets/images/titleImage2.png';
-import title3 from '../../../../assets/images/titleImage2.png';
-import title4 from '../../../../assets/images/titleImage2.png'; 
+import { useState, useRef } from "react";
+import styles from "./Hero.module.scss";
+import { SwiperSlide, Swiper } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Swiper as SwiperCore } from "swiper";
+import { useGetImagesQuery } from "../../../store/loginSlice";
 
-console.log(import.meta.env.VITE_APP_URL);
-
+import title1 from "../../../../assets/images/titleImage2.png";
+import title2 from "../../../../assets/images/titleImage2.png";
+import title3 from "../../../../assets/images/titleImage2.png";
+import title4 from "../../../../assets/images/titleImage2.png";
 
 interface Image {
   id: number;
@@ -21,18 +19,16 @@ interface Image {
 
 export const Hero = () => {
   const swiperRef = useRef<SwiperCore | null>(null);
-  const { data: images = [], isLoading } = useGetImagesQuery(); 
-
+  const { data: images = [], isLoading } = useGetImagesQuery();
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (isLoading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
- 
   const fallbackImages: Image[] = [
-    { id: 1, url: title1 }, 
+    { id: 1, url: title1 },
     { id: 2, url: title2 },
     { id: 3, url: title3 },
     { id: 4, url: title4 },
@@ -59,7 +55,7 @@ export const Hero = () => {
             slidesPerView={3}
             slidesPerGroup={1}
             pagination={{ clickable: true }}
-            centeredSlides={true} 
+            centeredSlides={true}
             loop={true}
             navigation={false}
             className={styles.swiper}
@@ -67,7 +63,7 @@ export const Hero = () => {
             breakpoints={{
               369: {
                 slidesPerView: 1,
-                centeredSlides: false, 
+                centeredSlides: false,
               },
               768: {
                 slidesPerView: 2,
@@ -75,16 +71,18 @@ export const Hero = () => {
               },
               1024: {
                 slidesPerView: 3,
-                centeredSlides: true, 
+                centeredSlides: true,
               },
             }}
           >
             {finalImages.map((slide: Image, index: number) => (
               <SwiperSlide key={slide.id}>
                 <div
-                  className={`${styles.card} ${index === activeIndex ? styles.active : ''}`}
+                  className={`${styles.card} ${
+                    index === activeIndex ? styles.active : ""
+                  }`} // Добавляем класс для активного слайда
                 >
-                  <img src={`${import.meta.env.VITE_APP_URL}/uploads/${slide.id}/download`} alt={`Slide ${slide.id}`} />
+                  <img src={slide.url} alt={`Slide ${slide.id}`} />
                 </div>
               </SwiperSlide>
             ))}
