@@ -50,6 +50,17 @@
     width: 40px;
     height: 40px;
   }
+
+
+  .social a:hover:first-child {
+    content: url('../../assets/images/contacts/Property\ 1=telegram\ hover.png');
+}
+
+
+  .social a:hover:last-child {
+    content: url('../../assets/images/contacts/Property\ 1=instagram\ hover.png');
+}
+
   
   .links {
     font-family: "Noto Sans";
@@ -59,6 +70,10 @@
     color: #ececec;
     text-decoration: none;
     
+  }
+
+  .links:hover{
+    color: #F5D100;
   }
 
 

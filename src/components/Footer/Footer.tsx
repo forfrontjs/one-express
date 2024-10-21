@@ -8,6 +8,20 @@ import inst from "../../assets/images/footer/Instagram (1).png";
 import "../../assets/styles/_global.scss";
 
 export const Footer: React.FC = () => {
+
+    const scrollWithOffset = (el: HTMLElement | null): void => {
+        if (el) {
+            const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+            const yOffset = -150; 
+    
+            window.scrollTo({ 
+                top: yCoordinate + yOffset, 
+                behavior: 'smooth' 
+            });
+        }
+    };
+
+
     const location = useLocation(); 
 
 
@@ -44,9 +58,9 @@ export const Footer: React.FC = () => {
                     <Link to="/"><img className={style.firstlogo} src={logo} alt="Логотип" /></Link>
                     <nav className={style.contacts}>        
                         <HashLink smooth to="/#" className={style.links}>Главная</HashLink>
-                        <HashLink smooth to="/#Calculator" className={style.links}>Калькулятор</HashLink>
-                        <HashLink smooth to="/#tracking" className={style.links}>Отслеживание</HashLink>
-                        <HashLink smooth to="/#Contact" className={style.links}>Контакты</HashLink>
+                        <HashLink smooth to="/#Calculator" scroll={el => scrollWithOffset(el)} className={style.links}>Калькулятор</HashLink>
+                        <HashLink smooth to="/#tracking" scroll={el => scrollWithOffset(el)} className={style.links}>Отслеживание</HashLink>
+                        <HashLink smooth to="/#Contact" scroll={el => scrollWithOffset(el)} className={style.links}>Контакты</HashLink>
                     </nav>
                     <div className={style.social}>
                         <a href="https://telegram.org"><img className={style.sociallogos} src={tele} alt="Telegram" /></a>
