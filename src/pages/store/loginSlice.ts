@@ -23,6 +23,11 @@ interface NewUser {
   password: string;
 }
 
+export interface Image {
+  id: number;
+  url: string;
+}
+
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -75,6 +80,7 @@ export const apiSlice = createApi({
         method: "POST",
         body: newUser,
       }),
+
       transformResponse: (response: { user: User }) => response.user,
     }),
     getImages: builder.query<Image[], void>({

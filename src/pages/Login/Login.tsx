@@ -82,10 +82,11 @@ const Login: FC = () => {
               alt="Скрыть/показать пароль"
             />
           </label>
-
-          <Link className={styles.formForgotPassword} to={"*"}>
-            Забыли пароль?
-          </Link>
+          <div className={styles.forgetPassword}>
+            <Link className={styles.formForgotPassword} to={"*"}>
+              Забыли пароль?
+            </Link>
+          </div>
           <button className={styles.loginButton} disabled={isLoading}>
             {isLoading ? "Загрузка..." : "ВОЙТИ"}
           </button>
