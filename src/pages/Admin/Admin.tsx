@@ -1,120 +1,236 @@
 import styles from './Admin.module.scss'
-import Photo from '../../assets/images/WhatsApp Image 2024-02-27 at 11.09 1.png'
 import Delete from '../../assets/images/DeleteLogo.png'
-import { useUploadFileMutation } from '../store/AdminSlice'
-// import { useState } from 'react'
-export const Admin = () => {
-  // const [uploadImg, setUploadImg] = useState<File | null>(null);
-  const [uploadFile] = useUploadFileMutation();
+import { useDeleteImagesMutation, useUploadFileMutation, useUploadImageMutation } from '../store/AdminSlice'
+import { useState } from 'react'
+import { useGetImagesQuery } from '../store/loginSlice';
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
 
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
 
-      try {
-        console.log("Загружаем файл:", file);
+export const Admin: React.FC = () => {
+   const {
+     data: images = [],
+     isLoading,
+     isError,
+     refetch,
+   } = useGetImagesQuery();
+   const [uploadImage] = useUploadImageMutation();
+   const [deleteImage] = useDeleteImagesMutation();
+   const [uploadFile] = useUploadFileMutation();
+  // const {
+  //   data: excelBlob,
+  //   isLoading: isExcelLoading,
+  //   error: excelError,
+  // } = useDownloadExcelQuery();
 
-        const result = await uploadFile(file).unwrap();
-        console.log("Файл успешно загружен:", result);
-      } catch (err: any) {
-        console.error("Ошибка при загрузке:", err);
-        if (err.status === "FETCH_ERROR") {
-          console.error("Возможно, проблема с CORS или неверный URL.");
-        }
-      }
+
+   const [imageFile, setImageFile] = useState<File | null>(null); // Для изображения
+   const [excelFile, setExcelFile] = useState<File | null>(null); // Для Excel-файла
+   const [date, setDate] = useState<string>("");
+
+    // const handleDownloadExcel = () => {
+    //   if (excelBlob) {
+    //     const url = window.URL.createObjectURL(excelBlob);
+    //     const link = document.createElement("a");
+    //     link.href = url;
+    //     link.setAttribute("download", "users.xlsx"); // Имя файла
+    //     document.body.appendChild(link);
+    //     link.click();
+    //     document.body.removeChild(link);
+    //     window.URL.revokeObjectURL(url);
+    //   }
+      
+    // };
+
+   const handleDelete = async (id: number) => {
+     try {
+       await deleteImage(id).unwrap();
+       console.log(`Изображение с id ${id} успешно удалено.`);
+       refetch(); 
+     } catch (error) {
+       console.error("Ошибка при удалении изображения:", error);
+     }
+   };
+
+   // Обработчик выбора изображения
+const handleUploadImage = async () => {
+  if (imageFile) {
+    try {
+      console.log("Загружаем изображение:", imageFile);
+      const result = await uploadImage(imageFile).unwrap();
+      console.log("Изображение успешно загружено:", result);
+      refetch(); 
+    } catch (err: any) {
+      console.error("Ошибка при загрузке изображения:", err);
     }
-  };
+  } else {
+    alert("Пожалуйста, выберите изображение.");
+  }
+};
 
+
+   // Обработчик выбора Excel-файла
+   const handleExcelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files && e.target.files.length > 0) {
+        setExcelFile(e.target.files[0]);
+        console.log("Файл выбран:", e.target.files[0]); 
+      }
+   };
+
+   const formatDate = (dateString: string) => {
+     const [year, month, day] = dateString.split("-") 
+     return `${day}-${month}-${year}`;
+   };
+   // Обработчик отправки Excel-файла
+   const handleUploadExcel = async (e: React.FormEvent) => {
+     e.preventDefault();
+    console.log("Проверка данных перед отправкой:", { excelFile, date });
+
+     if (excelFile && date) {
+       const formattedDate = formatDate(date); 
+       
+       try {
+         const result = await uploadFile({
+           file: excelFile,
+           date: formattedDate,
+         }).unwrap();
+         console.log("Excel-файл успешно загружен:", result);
+         alert("Excel-файл успешно загружен:");
+       } catch (error) {
+         console.error("Ошибка при загрузке Excel-файла:", error);
+       }
+     } else {
+       alert("Пожалуйста, выберите файл и дату.");
+       console.log(date);
+       
+     }
+   };
+
+   if (isLoading) return <p>Загрузка изображений...</p>;
+   if (isError) return <p>Ошибка при загрузке изображений.</p>;
   return (
-    <div  className={`${styles.container} container`}>
+    <div className={`${styles.container} container`}>
       <div className={styles.admin__box}>
         <h1>Панель администрации</h1>
         <div className={styles.admin__box__carousel}>
           <div className={styles.admin__box__upload}>
             <p>Фотографии в карусели</p>
-            <input
-              type="file"
-              id="file-upload"
-              onChange={handleFileChange}
-              className={styles.admin__box__upload__photo}
-            />
-            <label
-              htmlFor="file-upload"
-              className={styles.admin__box__upload__btn}
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className={styles.uploadImageForm}
             >
-              Загрузить фото
-            </label>
+              <input
+                type="file"
+                id="file-upload"
+                onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+                className={styles.admin__box__upload__photo}
+              />
+              <label
+                htmlFor="file-upload"
+                className={styles.admin__box__upload__btn}
+              >
+                Загрузить фото
+              </label>
+              <button type="button" onClick={handleUploadImage}>
+                Сохранить
+              </button>
+            </form>
           </div>
           <div className={styles.admin__box__carousel__photos}>
-            <div className={styles.admin__box__carousel__photos__photo}>
-              <img src={Photo} alt="" />
-              <button>
-                <img src={Delete} alt="" />
-              </button>
-            </div>
-            <div className={styles.admin__box__carousel__photos__photo}>
-              <img src={Photo} alt="" />
-              <button>
-                <img src={Delete} alt="" />
-              </button>
-            </div>
-            <div className={styles.admin__box__carousel__photos__photo}>
-              <img src={Photo} alt="" />
-              <button>
-                <img src={Delete} alt="" />
-              </button>
-            </div>
-            <div className={styles.admin__box__carousel__photos__photo}>
-              <img src={Photo} alt="" />
-              <button>
-                <img src={Delete} alt="" />
-              </button>
-            </div>
+            {images.map((el) => (
+              <div
+                key={el.id}
+                className={styles.admin__box__carousel__photos__photo}
+              >
+                <div className={styles.imageBox}>
+                  <img
+                    src={`${import.meta.env.VITE_APP_URL}/uploads/${
+                      el.id
+                    }/download`}
+                    id={`photo-${el.id}`}
+                    alt={`Фото ${el.id}`}
+                  />
+                </div>
+                <button
+                  aria-label={`${el.id}`}
+                  onClick={() => handleDelete(el.id)}
+                >
+                  <img src={Delete} alt="Удалить" />
+                </button>
+              </div>
+            ))}
           </div>
         </div>
         <div className={styles.cards}>
-          <div className={styles.cards__card}>
+          <form className={styles.cards__card} onSubmit={handleUploadExcel}>
             <h2>Выгрузить файл Excel: Китай </h2>
             <div className={styles.cards__card__box}>
-              <input type="file" id="file-upload" />
+              <input
+                type="file"
+                id="china-file-upload"
+                onChange={handleExcelChange}
+                accept=".xlsx, .xls"
+              />
               <label
-                htmlFor="file-upload"
+                htmlFor="china-file-upload"
                 className={styles.cards__card__label}
               >
                 Выбрать файл
               </label>
               <input
                 type="date"
-                value="2024-10-10"
                 min="2024-10-10"
+                max="2030-10-10"
+                onChange={(e) => setDate(e.target.value)}
               />
             </div>
-            <button>Отправить</button>
-          </div>
-          <div className={styles.cards__card}>
+            <button type="submit">Отправить</button>
+          </form>
+          <form className={styles.cards__card} onSubmit={handleUploadExcel}>
             <h2>Выгрузить файл Excel: Бишкек </h2>
             <div className={styles.cards__card__box}>
-              <input type="file" id="file-upload" />
+              <input
+                type="file"
+                id="bish-file-upload"
+                onChange={handleExcelChange}
+                accept=".xlsx, .xls"
+              />
               <label
-                htmlFor="file-upload"
+                htmlFor="bish-file-upload"
                 className={styles.cards__card__label}
               >
                 Выбрать файл
               </label>
-              <input type="date" value="2024-06-01" />
+              <input
+                type="date"
+                min="2024-10-10"
+                max="2030-10-10"
+                onChange={(e) => setDate(e.target.value)}
+              />
             </div>
-            <button>Отправить</button>
-          </div>
+            <button type="submit">Отправить</button>
+          </form>
           <div className={styles.cards__card}>
             <h2>Получить файл Excel: Список клиентов</h2>
+            {/* onClick={handleDownloadExcel} disabled={isExcelLoading} */}
             <button>Загрузить</button>
+            {/* {excelError && (
+              <p>
+                Ошибка при скачивании Excel файла:{" "}
+                {
+                  // Проверяем тип ошибки
+                  "status" in excelError
+                    ? `Статус: ${excelError.status}, Данные: ${JSON.stringify(
+                        excelError.data
+                      )}`
+                    : "Неизвестная ошибка"
+                }
+              </p>
+            )} */}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 

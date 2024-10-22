@@ -3,11 +3,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const adminApi = createApi({
   reducerPath: "adminApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://192.168.68.137:5009",
-    credentials: "include",
+    baseUrl: import.meta.env.VITE_APP_URL,
     prepareHeaders: (headers) => {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwiaWQiOiJlYTgwNDU2Zi1hMzdjLTQyMzctODIyMC0wMDRkOTJmZTAzMjIiLCJpYXQiOjE3Mjg4OTU3ODl9.g9uBUqU4AVWLqAlXWOsrO6spTUsv2MCA8rOBhUqZtfg";
+      const token = localStorage.getItem("accesToken");
+      console.log(token);
+
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
@@ -15,7 +15,7 @@ export const adminApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    uploadFile: builder.mutation({
+    uploadImage: builder.mutation({
       query: (file: File) => {
         const formData = new FormData();
         formData.append("file", file);
@@ -27,8 +27,39 @@ export const adminApi = createApi({
         };
       },
     }),
+    deleteImages: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `uploads/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    uploadFile: builder.mutation({
+      query: ({ file, date }: { file: File; date: string }) => {
+        const FileData = new FormData();
+        FileData.append("file", file);
+
+        return {
+          url: `/product/add/cn/1/${date}`,
+          method: "POST",
+          body: FileData,
+        };
+      },
+    }),
+    downloadExcel: builder.query<Blob, void>({
+      query: () => "/users/shop/1",
+      transformResponse: (response: unknown) => {
+        if (response instanceof Blob) {
+          return response;
+        }
+
+        // Преобразуйте response в Blob, если это не Blob
+        return new Blob([response as ArrayBuffer], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+      },
+    }),
   }),
 });
 
 
-export const { useUploadFileMutation } = adminApi;
+export const { useUploadImageMutation, useDeleteImagesMutation, useUploadFileMutation, useDownloadExcelQuery } = adminApi;
