@@ -80,9 +80,9 @@ export const Hero = () => {
                 <div
                   className={`${styles.card} ${
                     index === activeIndex ? styles.active : ""
-                  }`} // Добавляем класс для активного слайда
+                  }`} // Добавляем класс для активного слайда  // время ожидание запросов в реакт
                 >
-                  <img src={slide.url} alt={`Slide ${slide.id}`} />
+                  <img src={`${import.meta.env.VITE_APP_URL}/uploads/${slide.id}/download`} alt={`Slide ${slide.id}`} />
                 </div>
               </SwiperSlide>
             ))}

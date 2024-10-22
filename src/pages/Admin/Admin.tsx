@@ -1,7 +1,7 @@
 import styles from './Admin.module.scss'
 import Photo from '../../assets/images/WhatsApp Image 2024-02-27 at 11.09 1.png'
 import Delete from '../../assets/images/DeleteLogo.png'
-import { useUploadFileMutation } from '../store/AdminSlice'
+import { useUploadFileMutation } from '../../pages/store/AdminSlice'
 // import { useState } from 'react'
 export const Admin = () => {
   // const [uploadImg, setUploadImg] = useState<File | null>(null);
