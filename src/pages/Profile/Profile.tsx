@@ -1,16 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Profile.module.scss";
-// console.log(styles);
+import classNames from "classnames";
+
+const months = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
 
 const Profile: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState("Октябрь");
+  const [statistics, setStatistics] = useState({
+    orders: 0,
+    weight: 0,
+    paid: 0,
+  });
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleMonthSelect = (month: string) => {
+    setSelectedMonth(month);
+    setIsDropdownOpen(false);
+    fetchStatistics(month);
+  };
+
+  const handleCopyClick = () => {
+    navigator.clipboard
+      .writeText("ONE-1")
+      .then(() => {
+        alert("Персональный код скопирован в буфер обмена!");
+      })
+      .catch((err) => {
+        console.error("Ошибка копирования: ", err);
+      });
+  };
+
+  const fetchStatistics = async (month: string) => {
+    try {
+      const response = await fetch(
+        `http://192.168.68.236:5009/statistics?month=${month}`
+      );
+      if (!response.ok) {
+        throw new Error("Ошибка при запросе данных");
+      }
+      const data = await response.json();
+      setStatistics({
+        orders: data.orders || 0,
+        weight: data.weight || 0,
+        paid: data.paid || 0,
+      });
+    } catch (error) {
+      console.error("Ошибка получения статистики:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStatistics(selectedMonth);
+  }, []);
+
   return (
-    <div className="container">
+    <div className={`${styles.container} container`}>
       <div className={styles.profileSection}>
         <div className={styles.TitleSection}>
           <h2 className={styles.PersonalProfile}>Личный профиль</h2>
@@ -18,7 +79,7 @@ const Profile: React.FC = () => {
         </div>
 
         <div className={styles.Secret}>
-          <a href="" className={styles.ChangePassword}>
+          <a href="/login" className={styles.ChangePassword}>
             Сменить пароль
           </a>
 
@@ -26,11 +87,14 @@ const Profile: React.FC = () => {
             <a href="#" className={styles.PersonalCode}>
               Персональный код
             </a>
-            <div className={styles.ONEicon}>
-              <p className={styles.ONE}>ONE-1</p>
+            <div className={styles.ONEicon} onClick={handleCopyClick}>
+              <a href="#" className={styles.ONE}>
+                ONE-1
+              </a>
               <svg
-                width="16"
-                height="16"
+                className={styles.Icon}
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +116,7 @@ const Profile: React.FC = () => {
       <div className={styles.Statistics}>
         <div className={styles.StatisticsButton}>
           <h2 className={styles.YourStatistics}>
-            Ваша статистика за текущий месяц
+            Ваша статистика за {selectedMonth}
           </h2>
           <button onClick={toggleDropdown} className={styles.changeMonth}>
             Выбрать другой месяц
@@ -74,18 +138,11 @@ const Profile: React.FC = () => {
 
           {isDropdownOpen && (
             <ul className={styles.dropdownMenu}>
-              <li>Январь</li>
-              <li>Февраль</li>
-              <li>Март</li>
-              <li>Апрель</li>
-              <li>Май</li>
-              <li>Июнь</li>
-              <li>Июль</li>
-              <li>Август</li>
-              <li>Сентябрь</li>
-              <li>Октябрь</li>
-              <li>Ноябрь</li>
-              <li>Декабрь</li>
+              {months.map((month) => (
+                <li key={month} onClick={() => handleMonthSelect(month)}>
+                  {month}
+                </li>
+              ))}
             </ul>
           )}
         </div>
@@ -93,21 +150,22 @@ const Profile: React.FC = () => {
         <div className={styles.MonthStatistics}>
           <div className={styles.NumberOrders}>
             <p className={styles.Orders}>Количество заказов</p>
-            <div className={styles.Number}>0</div>
+            <div className={styles.Number}>{statistics.orders}</div>
           </div>
 
           <div className={styles.NumberOrders}>
             <p className={styles.Orders}>Вес заказов</p>
-            <div className={styles.Number}>0 кг</div>
+            <div className={styles.Number}>{statistics.weight} кг</div>
           </div>
 
           <div className={styles.NumberOrders}>
             <p className={styles.Orders}>Оплачено</p>
-            <div className={styles.NumberSom}>0 сом</div>
+            <div className={styles.NumberSom}>{statistics.paid} сом</div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default Profile;

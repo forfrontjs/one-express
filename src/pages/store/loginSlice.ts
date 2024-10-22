@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-}
+import {
+  AuthResponseLocal,
+  User,
+  mapAuthResponseToUser,
+} from "../../interfaces/authTypes";
+import { setUser } from "./RouteSlice";
 
 interface LoginRequest {
   email: string;
@@ -13,13 +12,14 @@ interface LoginRequest {
 }
 
 interface LoginResponse {
-  user: User;
-  token: string;
+  access_token: string;
 }
 
 interface NewUser {
-  name: string;
   email: string;
+  name: string;
+  phone: string;
+  residenceCity: string;
   password: string;
 }
 
@@ -30,7 +30,9 @@ export interface Image {
 
 export const apiSlice = createApi({
   reducerPath: "api",
+
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_URL }),
+
   endpoints: (builder) => ({
     loginUser: builder.mutation<LoginResponse, LoginRequest>({
       query: ({ email, password }) => ({
@@ -38,27 +40,46 @@ export const apiSlice = createApi({
         method: "POST",
         body: { email, password },
       }),
-      transformResponse: (response: {
-        user: User;
-        access_token: string;
-      }): LoginResponse => {
-        console.log(response);
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          localStorage.setItem("accessToken", data.access_token);
 
-        localStorage.setItem("accesToken", response.access_token);
+          // Получение данных пользователя с использованием нового интерфейса
+          let userResponse = await dispatch(
+            apiSlice.endpoints.getLoginUser.initiate()
+          );
 
+          if (userResponse.data) {
+            const user: User = mapAuthResponseToUser(
+              userResponse.data as AuthResponseLocal
+            );
+            dispatch(setUser(user));
+          }
+        } catch (error) {
+          console.error("Ошибка при сохранении токена:", error);
+        }
+      },
+    }),
+    getLoginUser: builder.query<AuthResponseLocal, void>({
+      query: () => {
+        const token = localStorage.getItem("accessToken");
         return {
-          user: response.user,
-          token: response.access_token,
+          url: "/users/info",
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`, // Правильный формат передачи токена
+          },
         };
       },
     }),
-
     registerUser: builder.mutation<User, NewUser>({
       query: (newUser) => ({
-        url: "/register",
+        url: "/users",
         method: "POST",
         body: newUser,
       }),
+
       transformResponse: (response: { user: User }) => response.user,
     }),
     getImages: builder.query<Image[], void>({
@@ -71,4 +92,5 @@ export const {
   useRegisterUserMutation,
   useLoginUserMutation,
   useGetImagesQuery,
+  useGetLoginUserQuery,
 } = apiSlice;
