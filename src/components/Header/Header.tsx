@@ -135,7 +135,7 @@ export const Header: FC<HeaderProps> = () => {
         )}
         <div className={styles.login}>
           {!loggedIn ? (
-            <Link className={styles.loginButton} to="/login" onClick={returnNav}>
+            <Link className={styles.loginButton} to="/" onClick={returnNav}>
               Войти
             </Link>
           ) : (

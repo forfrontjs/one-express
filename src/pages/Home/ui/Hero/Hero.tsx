@@ -80,14 +80,18 @@ export const Hero = () => {
                 <div
                   className={`${styles.card} ${
                     index === activeIndex ? styles.active : ""
-                  }`} // Добавляем класс для активного слайда
+                  }`} // Добавляем класс для активного слайда  // время ожидание запросов в реакт
                 >
+<<<<<<< HEAD
+                  <img src={`${import.meta.env.VITE_APP_URL}/uploads/${slide.id}/download`} alt={`Slide ${slide.id}`} />
+=======
                   <img
                     src={`${import.meta.env.VITE_APP_URL}/uploads/${
                       slide.id
                     }/download`}
                     alt={`Slide ${slide.id}`}
                   />
+>>>>>>> 7a53e241d740201bf5d6197c4230b509bdfc6332
                 </div>
               </SwiperSlide>
             ))}
