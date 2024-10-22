@@ -62,10 +62,16 @@ export const apiSlice = createApi({
       },
     }),
     getLoginUser: builder.query<AuthResponseLocal, void>({
-      query: () => ({
-        url: "/users/info",
-        method: "GET",
-      }),
+      query: () => {
+        const token = localStorage.getItem("accessToken");
+        return {
+          url: "/users/info",
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`, // Правильный формат передачи токена
+          },
+        };
+      },
     }),
     registerUser: builder.mutation<User, NewUser>({
       query: (newUser) => ({

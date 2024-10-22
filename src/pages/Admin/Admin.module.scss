@@ -3,6 +3,7 @@
         display: flex;
         flex-direction: column;
         row-gap: 60px;
+        padding-top: 100px;
     h1{
         font-family: "Noto Sans", sans-serif;
         font-weight: 600;
@@ -15,8 +16,8 @@
         row-gap: 110px;
         &__photos{
             display: flex;
-            justify-content: space-between;
             overflow-x: scroll;
+            column-gap: 20px;
             &__photo{
                 display: flex;
                 align-items: center;
@@ -61,6 +62,20 @@
         }
         &__photo{
             display: none;
+        }
+        .uploadImageForm{
+            display: flex;
+            flex-direction: column;
+            row-gap: 15px;
+
+            button{
+                height: 56px;
+                background: yellow;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 120%;
+                text-transform: uppercase;
+            }
         }
     }
     .cards{
@@ -125,6 +140,16 @@
         }
     }
 }
+}
+
+.imageBox {
+    // aspect-ratio: 1/1;
+    img {
+        width: 280px;
+        height: 280px;
+        // object-fit: cover;
+        // object-position: center;
+    }
 }
 
 @media(min-width: 375px) and (max-width: 767px){
