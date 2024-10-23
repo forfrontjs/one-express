@@ -1,3 +1,5 @@
+
+
 .footer {
     width: 100%;
     height: 139px;
@@ -5,15 +7,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    margin-top: 100px;
   }
 
-  .container{
-    width: 90%;
-    height: 85px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.container{
+  width: 1284px;
+ 
+
+}
+
   
   .inner {
     width: 100%;
@@ -34,8 +37,8 @@
     width: 60%;
     height: 22px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    gap: 60px;
   }
   
   .firstlogo {
@@ -47,6 +50,17 @@
     width: 40px;
     height: 40px;
   }
+
+
+  .social a:hover:first-child {
+    content: url('../../assets/images/contacts/Property\ 1=telegram\ hover.png');
+}
+
+
+  .social a:hover:last-child {
+    content: url('../../assets/images/contacts/Property\ 1=instagram\ hover.png');
+}
+
   
   .links {
     font-family: "Noto Sans";
@@ -56,6 +70,10 @@
     color: #ececec;
     text-decoration: none;
     
+  }
+
+  .links:hover{
+    color: #F5D100;
   }
 
 
